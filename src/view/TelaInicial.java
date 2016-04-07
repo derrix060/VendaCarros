@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JRootPane;
+
 /**
  *
  * @author mario
@@ -15,7 +17,10 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form telaInicial
      */
     public TelaInicial() {
-        initComponents();
+        this.initComponents();
+        
+        this.setExtendedState(MAXIMIZED_BOTH);
+        
     }
 
     /**
@@ -27,14 +32,29 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuEditar = new javax.swing.JMenu();
         menuVeiculo = new javax.swing.JMenu();
         itemMenuVeiculoCadastrar = new javax.swing.JMenuItem();
+        itemMenuVeiculoConsultar = new javax.swing.JMenuItem();
         menuLoja = new javax.swing.JMenu();
+        itemMenuLojaCadastrar = new javax.swing.JMenuItem();
+        menuPropostas = new javax.swing.JMenu();
+        itemMenuPropostasCadastrar = new javax.swing.JMenuItem();
+        itemMenuPropostasConsultar = new javax.swing.JMenuItem();
+        menuCliente = new javax.swing.JMenu();
+        itemMenuClienteCadastrar = new javax.swing.JMenuItem();
+        itemMenuClienteConsultar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Venda de Carros");
+        setResizable(false);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/venda-de-carros.jpg"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         menuArquivo.setText("Arquivo");
         jMenuBar1.add(menuArquivo);
@@ -52,10 +72,47 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuVeiculo.add(itemMenuVeiculoCadastrar);
 
+        itemMenuVeiculoConsultar.setText("Consultar");
+        itemMenuVeiculoConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuVeiculoConsultarActionPerformed(evt);
+            }
+        });
+        menuVeiculo.add(itemMenuVeiculoConsultar);
+
         jMenuBar1.add(menuVeiculo);
 
         menuLoja.setText("Loja");
+
+        itemMenuLojaCadastrar.setText("Cadastrar");
+        itemMenuLojaCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuLojaCadastrarActionPerformed(evt);
+            }
+        });
+        menuLoja.add(itemMenuLojaCadastrar);
+
         jMenuBar1.add(menuLoja);
+
+        menuPropostas.setText("Propostas");
+
+        itemMenuPropostasCadastrar.setText("Cadastrar");
+        menuPropostas.add(itemMenuPropostasCadastrar);
+
+        itemMenuPropostasConsultar.setText("Consultar");
+        menuPropostas.add(itemMenuPropostasConsultar);
+
+        jMenuBar1.add(menuPropostas);
+
+        menuCliente.setText("Cliente");
+
+        itemMenuClienteCadastrar.setText("Cadastrar");
+        menuCliente.add(itemMenuClienteCadastrar);
+
+        itemMenuClienteConsultar.setText("Consultar");
+        menuCliente.add(itemMenuClienteConsultar);
+
+        jMenuBar1.add(menuCliente);
 
         setJMenuBar(jMenuBar1);
 
@@ -63,11 +120,15 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1886, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 873, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 652, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,10 +137,20 @@ public class TelaInicial extends javax.swing.JFrame {
     private void itemMenuVeiculoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoCadastrarActionPerformed
         TelaCadastroVeiculo tela = new TelaCadastroVeiculo();
         
-        //tela.
         tela.setVisible(true);
-        //tela.setEnabled(true);
     }//GEN-LAST:event_itemMenuVeiculoCadastrarActionPerformed
+
+    private void itemMenuVeiculoConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoConsultarActionPerformed
+        TelaConsultarVeiculo tela = new TelaConsultarVeiculo();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuVeiculoConsultarActionPerformed
+
+    private void itemMenuLojaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuLojaCadastrarActionPerformed
+        TelaCadastroLoja tela = new TelaCadastroLoja();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuLojaCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,11 +189,20 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemMenuClienteCadastrar;
+    private javax.swing.JMenuItem itemMenuClienteConsultar;
+    private javax.swing.JMenuItem itemMenuLojaCadastrar;
+    private javax.swing.JMenuItem itemMenuPropostasCadastrar;
+    private javax.swing.JMenuItem itemMenuPropostasConsultar;
     private javax.swing.JMenuItem itemMenuVeiculoCadastrar;
+    private javax.swing.JMenuItem itemMenuVeiculoConsultar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenu menuCliente;
     private javax.swing.JMenu menuEditar;
     private javax.swing.JMenu menuLoja;
+    private javax.swing.JMenu menuPropostas;
     private javax.swing.JMenu menuVeiculo;
     // End of variables declaration//GEN-END:variables
 }
