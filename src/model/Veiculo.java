@@ -5,7 +5,6 @@ package model;
  * @author mario
  */
 public class Veiculo {
-    private String lojaReferencia;
     private String marca;
     private String modelo;
     private int ano;
@@ -31,6 +30,7 @@ public class Veiculo {
     private boolean luzDiurna;
     private boolean comandoVolante;
     private boolean airBag;
+    private String nomeImagem;
     
     
     //Constructors
@@ -38,7 +38,7 @@ public class Veiculo {
     public Veiculo() {
     }
 
-    public Veiculo(String marca, String modelo, int ano, String cor, String transmissao, String motor, String placa, Long renavam, String chassi, Double valorCompra, int odometro, boolean disponivel, String categoria, boolean arCondicionado, boolean abs, boolean tetoSolar, boolean kitEletrico, boolean bancoCouro, boolean direcaoHidraulica, boolean farolMilha, boolean centralMultimidia, boolean pilotoAutomatico, boolean luzDiurna, boolean comandoVolante, boolean airBag) {
+    public Veiculo(String marca, String modelo, int ano, String cor, String transmissao, String motor, String placa, Long renavam, String chassi, Double valorCompra, int odometro, boolean disponivel, String categoria, boolean arCondicionado, boolean abs, boolean tetoSolar, boolean kitEletrico, boolean bancoCouro, boolean direcaoHidraulica, boolean farolMilha, boolean centralMultimidia, boolean pilotoAutomatico, boolean luzDiurna, boolean comandoVolante, boolean airBag, String nomeImagem) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
@@ -64,16 +64,19 @@ public class Veiculo {
         this.luzDiurna = luzDiurna;
         this.comandoVolante = comandoVolante;
         this.airBag = airBag;
+        this.nomeImagem = nomeImagem;
     }
     
-    public String getLojaReferencia() {    
-        return lojaReferencia;
-    }
 
     //Getter and Setter
-    public void setLojaReferencia(String lojaReferencia) {    
-        this.lojaReferencia = lojaReferencia;
+    
+    public String getNomeImagem() {    
+        return nomeImagem;
     }
+    public void setNomeImagem(String nomeImagem){
+        this.nomeImagem = nomeImagem;
+    }
+        
 
     public String getMarca() {
         return marca;

@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mario/Documents/NetBeansProjects/VendaCarros/src/view/TelaInicial.java</file>
-            <file>file:/C:/Users/mario/Documents/NetBeansProjects/VendaCarros/src/view/TelaCadastroVeiculo.java</file>
-            <file>file:/C:/Users/mario/Documents/NetBeansProjects/VendaCarros/src/model/Veiculo.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/model/Veiculo.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/model/Cliente.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/controller/FiltraVeiculo.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/view/TelaCadastroLoja.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/view/TelaCadastroVeiculo.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/controller/JavaToJson.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/view/TelaConsultarVeiculo.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/view/TelaInicial.java</file>
+            <file>file:/C:/Users/mario/teste/VendaCarros/src/model/Proposta.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,8 +5,7 @@
  */
 package view;
 
-import javax.swing.JRootPane;
-
+import controller.VeiculoController;
 /**
  *
  * @author mario
@@ -18,10 +17,10 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         this.initComponents();
-        
         this.setExtendedState(MAXIMIZED_BOTH);
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,15 +119,11 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 873, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1886, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 652, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1536, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
