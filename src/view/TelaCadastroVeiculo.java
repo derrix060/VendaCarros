@@ -6,14 +6,9 @@
 package view;
 
 import controller.VeiculoController;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import model.Veiculo;
+import static view.FrameVeiculo.*;
 
 /**
  *
@@ -38,236 +33,12 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
 
         btnGroupDisponivel = new javax.swing.ButtonGroup();
         jSeparator1 = new javax.swing.JSeparator();
-        lblMarca = new javax.swing.JLabel();
-        cmbMarca = new javax.swing.JComboBox<>();
-        lblModelo = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
-        lblAno = new javax.swing.JLabel();
-        txtAno = new javax.swing.JTextField();
-        lblCor = new javax.swing.JLabel();
-        cmbCor = new javax.swing.JComboBox<>();
-        lblTransmissao = new javax.swing.JLabel();
-        cmbTransmissao = new javax.swing.JComboBox<>();
-        lblMotor = new javax.swing.JLabel();
-        txtMotor = new javax.swing.JTextField();
-        lblPlaca = new javax.swing.JLabel();
-        txtPlaca = new javax.swing.JTextField();
-        lblRenavam = new javax.swing.JLabel();
-        txtRenavam = new javax.swing.JTextField();
-        lblChassi = new javax.swing.JLabel();
-        txtChassi = new javax.swing.JTextField();
-        lblValorCompra = new javax.swing.JLabel();
-        txtValorCompra = new javax.swing.JTextField();
-        lblOdometro = new javax.swing.JLabel();
-        txtOdometro = new javax.swing.JTextField();
-        lblDisponivel = new javax.swing.JLabel();
-        rdDisponivelSim = new javax.swing.JRadioButton();
-        rdDisponivelNao = new javax.swing.JRadioButton();
-        lblCategoria = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<>();
-        panelOpcionais = new javax.swing.JPanel();
-        chkArCondicionado = new javax.swing.JCheckBox();
-        chkABS = new javax.swing.JCheckBox();
-        chkTetoSolar = new javax.swing.JCheckBox();
-        chkKitEletrico = new javax.swing.JCheckBox();
-        chkBancoCouro = new javax.swing.JCheckBox();
-        chkDirecaoHidraulica = new javax.swing.JCheckBox();
-        chkFarolMilha = new javax.swing.JCheckBox();
-        chkCentralMultimidia = new javax.swing.JCheckBox();
-        chkPilotoAutomatico = new javax.swing.JCheckBox();
-        chkLuzDiurna = new javax.swing.JCheckBox();
-        chkComandoVolante = new javax.swing.JCheckBox();
-        chkAirBag = new javax.swing.JCheckBox();
         btnSalvar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        lblFoto = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtLocalFoto = new javax.swing.JTextField();
-        btnCarregarCarro = new javax.swing.JButton();
+        frameVeiculo = new view.FrameVeiculo();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        lblMarca.setText("Marca");
-
-        cmbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Renault", "Ford", "Fiat", "Volkswagen", "Chevrolet", "Toyota", "Hyundai", "Honda", "BMW", "Mercedes", "Audi" }));
-        cmbMarca.setSelectedIndex(-1);
-        cmbMarca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMarcaActionPerformed(evt);
-            }
-        });
-
-        lblModelo.setText("Modelo");
-
-        txtModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModeloActionPerformed(evt);
-            }
-        });
-
-        lblAno.setText("Ano");
-
-        lblCor.setText("Cor");
-
-        cmbCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "prata", "preto", "branco", "azul", "amarelo", "vermelho", "verde" }));
-        cmbCor.setSelectedIndex(-1);
-
-        lblTransmissao.setText("Transmissão");
-
-        cmbTransmissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manual", "Automatico" }));
-        cmbTransmissao.setSelectedIndex(-1);
-
-        lblMotor.setText("Motor");
-
-        txtMotor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMotor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMotorActionPerformed(evt);
-            }
-        });
-
-        lblPlaca.setText("Placa");
-
-        lblRenavam.setText("Renavam");
-
-        lblChassi.setText("Chassi");
-
-        lblValorCompra.setText("Valor Compra");
-
-        lblOdometro.setText("Odômetro");
-
-        txtOdometro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtOdometroActionPerformed(evt);
-            }
-        });
-
-        lblDisponivel.setText("Disponível");
-
-        btnGroupDisponivel.add(rdDisponivelSim);
-        rdDisponivelSim.setText("Sim");
-
-        btnGroupDisponivel.add(rdDisponivelNao);
-        rdDisponivelNao.setText("Não");
-
-        lblCategoria.setText("Categoria");
-
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carro", "Caminhonete", "Caminhão", "Moto" }));
-        cmbCategoria.setSelectedIndex(-1);
-        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoriaActionPerformed(evt);
-            }
-        });
-
-        panelOpcionais.setBorder(javax.swing.BorderFactory.createTitledBorder("Opcionais"));
-
-        chkArCondicionado.setText("Ar Condicionado");
-
-        chkABS.setText("ABS");
-        chkABS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkABSActionPerformed(evt);
-            }
-        });
-
-        chkTetoSolar.setText("Teto Solar");
-
-        chkKitEletrico.setText("Kit Eletrico");
-        chkKitEletrico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkKitEletricoActionPerformed(evt);
-            }
-        });
-
-        chkBancoCouro.setText("Banco de Couro");
-
-        chkDirecaoHidraulica.setText("Direcao Hidraulica");
-        chkDirecaoHidraulica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkDirecaoHidraulicaActionPerformed(evt);
-            }
-        });
-
-        chkFarolMilha.setText("Farol de Milha");
-
-        chkCentralMultimidia.setText("Central Multimidia");
-        chkCentralMultimidia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkCentralMultimidiaActionPerformed(evt);
-            }
-        });
-
-        chkPilotoAutomatico.setText("Piloto Automatico");
-
-        chkLuzDiurna.setText("Luz Diurna");
-        chkLuzDiurna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkLuzDiurnaActionPerformed(evt);
-            }
-        });
-
-        chkComandoVolante.setText("Comando de Volante");
-
-        chkAirBag.setText("AirBag");
-
-        javax.swing.GroupLayout panelOpcionaisLayout = new javax.swing.GroupLayout(panelOpcionais);
-        panelOpcionais.setLayout(panelOpcionaisLayout);
-        panelOpcionaisLayout.setHorizontalGroup(
-            panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOpcionaisLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(chkBancoCouro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkKitEletrico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkArCondicionado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkTetoSolar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkABS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(chkDirecaoHidraulica))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chkFarolMilha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkCentralMultimidia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkPilotoAutomatico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkLuzDiurna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkComandoVolante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(chkAirBag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        panelOpcionaisLayout.setVerticalGroup(
-            panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOpcionaisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkArCondicionado)
-                    .addComponent(chkFarolMilha))
-                .addGap(18, 18, 18)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkABS)
-                    .addComponent(chkCentralMultimidia))
-                .addGap(18, 18, 18)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkTetoSolar)
-                    .addComponent(chkPilotoAutomatico))
-                .addGap(18, 18, 18)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkKitEletrico)
-                    .addComponent(chkLuzDiurna))
-                .addGap(18, 18, 18)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkBancoCouro)
-                    .addComponent(chkComandoVolante))
-                .addGap(18, 18, 18)
-                .addGroup(panelOpcionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelOpcionaisLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(chkDirecaoHidraulica))
-                    .addGroup(panelOpcionaisLayout.createSequentialGroup()
-                        .addComponent(chkAirBag)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -290,17 +61,6 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        lblFoto.setBorder(javax.swing.BorderFactory.createTitledBorder("Foto"));
-
-        jLabel2.setText("Local Foto:");
-
-        btnCarregarCarro.setText("Carregar Carro");
-        btnCarregarCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCarregarCarroActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -308,223 +68,40 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblModelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTransmissao, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbCor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbTransmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblValorCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblOdometro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblChassi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblRenavam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblDisponivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPlaca)
-                            .addComponent(txtRenavam)
-                            .addComponent(txtChassi)
-                            .addComponent(txtValorCompra)
-                            .addComponent(txtOdometro)
-                            .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rdDisponivelSim)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rdDisponivelNao)))
-                        .addGap(37, 37, 37)
-                        .addComponent(panelOpcionais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(frameVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLocalFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnCarregarCarro)
-                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45)
-                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(20, 20, 20))
+                        .addGap(36, 36, 36)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblPlaca)
-                                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblRenavam)
-                                    .addComponent(txtRenavam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblChassi)
-                                    .addComponent(txtChassi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblValorCompra)
-                                    .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblOdometro)
-                                    .addComponent(txtOdometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblDisponivel)
-                                    .addComponent(rdDisponivelSim)
-                                    .addComponent(rdDisponivelNao)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblMarca)
-                                    .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblModelo))
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblAno)
-                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblCor)
-                                    .addComponent(cmbCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblTransmissao)
-                                    .addComponent(cmbTransmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblMotor))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCategoria)
-                            .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(panelOpcionais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(frameVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtLocalFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCarregarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtOdometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOdometroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOdometroActionPerformed
-
-    private void chkABSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkABSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkABSActionPerformed
-
-    private void chkKitEletricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkKitEletricoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkKitEletricoActionPerformed
-
-    private void chkDirecaoHidraulicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDirecaoHidraulicaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkDirecaoHidraulicaActionPerformed
-
-    private void chkCentralMultimidiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCentralMultimidiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkCentralMultimidiaActionPerformed
-
-    private void chkLuzDiurnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLuzDiurnaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkLuzDiurnaActionPerformed
-
-    private void txtMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMotorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMotorActionPerformed
-
-    private void cmbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMarcaActionPerformed
-
-    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModeloActionPerformed
-
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        cmbMarca.setSelectedIndex(-1);
-        txtModelo.setText("");
-        txtAno.setText("");
-        cmbCor.setSelectedIndex(-1);
-        cmbTransmissao.setSelectedIndex(-1);
-        txtMotor.setText("");
-        txtPlaca.setText("");
-        txtRenavam.setText("");
-        txtChassi.setText("");
-        txtValorCompra.setText("");
-        txtOdometro.setText("");
-        rdDisponivelNao.setSelected(false);
-        rdDisponivelSim.setSelected(false);
-        cmbCategoria.setSelectedIndex(-1);
-        chkArCondicionado.setSelected(false);
-        chkABS.setSelected(false);
-        chkTetoSolar.setSelected(false);
-        chkKitEletrico.setSelected(false);
-        chkBancoCouro.setSelected(false);
-        chkDirecaoHidraulica.setSelected(false);
-        chkFarolMilha.setSelected(false);
-        chkCentralMultimidia.setSelected(false);
-        chkPilotoAutomatico.setSelected(false);
-        chkLuzDiurna.setSelected(false);
-        chkComandoVolante.setSelected(false);
-        chkAirBag.setSelected(false);
-        lblFoto.setIcon(null);
-        
+        FrameVeiculo.limparCampos();        
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCategoriaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Veiculo veiculo = new Veiculo();
@@ -558,52 +135,10 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         
         veiculoController.adicionarVeiculo(veiculo);
         
+        FrameVeiculo.limparCampos();
+        JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!");
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnCarregarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarCarroActionPerformed
-        Veiculo v = veiculoController.getVeiculo(txtModelo.getText());
-        
-        
-        cmbMarca.setSelectedItem(v.getMarca());
-        txtModelo.setText(v.getModelo());
-        txtAno.setText(Integer.toString(v.getAno()));
-        cmbCor.setSelectedItem(v.getCor());
-        cmbTransmissao.setSelectedItem(v.getTransmissao());
-        txtMotor.setText(v.getMotor());
-        txtPlaca.setText(v.getPlaca());
-        txtRenavam.setText(Long.toString(v.getRenavam()));
-        txtChassi.setText(v.getChassi());
-        txtValorCompra.setText(Double.toString(v.getValorCompra()));
-        txtOdometro.setText(Integer.toString(v.getOdometro()));
-        
-        if (v.isDisponivel()){
-            rdDisponivelNao.setSelected(false);
-            rdDisponivelSim.setSelected(true);
-        }else{
-            rdDisponivelNao.setSelected(true);
-            rdDisponivelSim.setSelected(false);
-        }
-        
-        cmbCategoria.setSelectedItem(v.getCategoria());
-        chkArCondicionado.setSelected(v.isArCondicionado());
-        chkABS.setSelected(v.isAbs());
-        chkTetoSolar.setSelected(v.isTetoSolar());
-        chkKitEletrico.setSelected(v.isKitEletrico());
-        chkBancoCouro.setSelected(v.isBancoCouro());
-        chkDirecaoHidraulica.setSelected(v.isDirecaoHidraulica());
-        chkFarolMilha.setSelected(v.isFarolMilha());
-        chkCentralMultimidia.setSelected(v.isCentralMultimidia());
-        chkPilotoAutomatico.setSelected(v.isPilotoAutomatico());
-        chkLuzDiurna.setSelected(v.isLuzDiurna());
-        chkComandoVolante.setSelected(v.isComandoVolante());
-        chkAirBag.setSelected(v.isAirBag());
-        
-        
-        lblFoto.setIcon(new ImageIcon(getClass().getResource("/fotosCarros/" + v.getNomeImagem())));
-        
-        
-        
-    }//GEN-LAST:event_btnCarregarCarroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -641,54 +176,11 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCarregarCarro;
     private javax.swing.ButtonGroup btnGroupDisponivel;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JCheckBox chkABS;
-    private javax.swing.JCheckBox chkAirBag;
-    private javax.swing.JCheckBox chkArCondicionado;
-    private javax.swing.JCheckBox chkBancoCouro;
-    private javax.swing.JCheckBox chkCentralMultimidia;
-    private javax.swing.JCheckBox chkComandoVolante;
-    private javax.swing.JCheckBox chkDirecaoHidraulica;
-    private javax.swing.JCheckBox chkFarolMilha;
-    private javax.swing.JCheckBox chkKitEletrico;
-    private javax.swing.JCheckBox chkLuzDiurna;
-    private javax.swing.JCheckBox chkPilotoAutomatico;
-    private javax.swing.JCheckBox chkTetoSolar;
-    private javax.swing.JComboBox<String> cmbCategoria;
-    private javax.swing.JComboBox<String> cmbCor;
-    private javax.swing.JComboBox<String> cmbMarca;
-    private javax.swing.JComboBox<String> cmbTransmissao;
-    private javax.swing.JLabel jLabel2;
+    public view.FrameVeiculo frameVeiculo;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblAno;
-    private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblChassi;
-    private javax.swing.JLabel lblCor;
-    private javax.swing.JLabel lblDisponivel;
-    private javax.swing.JLabel lblFoto;
-    private javax.swing.JLabel lblMarca;
-    private javax.swing.JLabel lblModelo;
-    private javax.swing.JLabel lblMotor;
-    private javax.swing.JLabel lblOdometro;
-    private javax.swing.JLabel lblPlaca;
-    private javax.swing.JLabel lblRenavam;
-    private javax.swing.JLabel lblTransmissao;
-    private javax.swing.JLabel lblValorCompra;
-    private javax.swing.JPanel panelOpcionais;
-    private javax.swing.JRadioButton rdDisponivelNao;
-    private javax.swing.JRadioButton rdDisponivelSim;
-    private javax.swing.JTextField txtAno;
-    private javax.swing.JTextField txtChassi;
-    private javax.swing.JTextField txtLocalFoto;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtMotor;
-    private javax.swing.JTextField txtOdometro;
-    private javax.swing.JTextField txtPlaca;
-    private javax.swing.JTextField txtRenavam;
-    private javax.swing.JTextField txtValorCompra;
     // End of variables declaration//GEN-END:variables
 }

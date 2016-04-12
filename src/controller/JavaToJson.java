@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import model.Cliente;
+import model.Proposta;
 import model.Veiculo;
 
 /**
@@ -24,6 +26,16 @@ public class JavaToJson {
         json = gson.toJson(listaVeiculos);
         executa("listaVeiculos.json", json);
     }
+    
+    public void salvarClientes(ArrayList<Cliente> listaClientes){
+        json = gson.toJson(listaClientes);
+        executa("listaClientes.json", json);
+    }
+    
+    public void salvarPropostas(ArrayList<Proposta> listaPropostas){
+        json = gson.toJson(listaPropostas);
+        executa("listaPropostas.json", json);
+    }
 
     private void executa(String nomeArquivo, String json){
         try{
@@ -34,9 +46,6 @@ public class JavaToJson {
         catch (IOException e){
             e.printStackTrace();
         }
-
-
-        System.out.println(json);
     }
         
 }

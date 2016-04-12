@@ -38,14 +38,12 @@ public class TelaInicial extends javax.swing.JFrame {
         menuVeiculo = new javax.swing.JMenu();
         itemMenuVeiculoCadastrar = new javax.swing.JMenuItem();
         itemMenuVeiculoConsultar = new javax.swing.JMenuItem();
-        menuLoja = new javax.swing.JMenu();
-        itemMenuLojaCadastrar = new javax.swing.JMenuItem();
-        menuPropostas = new javax.swing.JMenu();
-        itemMenuPropostasCadastrar = new javax.swing.JMenuItem();
-        itemMenuPropostasConsultar = new javax.swing.JMenuItem();
         menuCliente = new javax.swing.JMenu();
         itemMenuClienteCadastrar = new javax.swing.JMenuItem();
         itemMenuClienteConsultar = new javax.swing.JMenuItem();
+        menuPropostas = new javax.swing.JMenu();
+        itemMenuPropostasCadastrar = new javax.swing.JMenuItem();
+        itemMenuPropostasConsultar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Venda de Carros");
@@ -61,8 +59,11 @@ public class TelaInicial extends javax.swing.JFrame {
         menuEditar.setText("Editar");
         jMenuBar1.add(menuEditar);
 
+        menuVeiculo.setMnemonic('v');
         menuVeiculo.setText("Veiculo");
 
+        itemMenuVeiculoCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuVeiculoCadastrar.setMnemonic('a');
         itemMenuVeiculoCadastrar.setText("Cadastrar");
         itemMenuVeiculoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +72,8 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuVeiculo.add(itemMenuVeiculoCadastrar);
 
+        itemMenuVeiculoConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuVeiculoConsultar.setMnemonic('o');
         itemMenuVeiculoConsultar.setText("Consultar");
         itemMenuVeiculoConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,37 +84,50 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(menuVeiculo);
 
-        menuLoja.setText("Loja");
+        menuCliente.setMnemonic('c');
+        menuCliente.setText("Cliente");
 
-        itemMenuLojaCadastrar.setText("Cadastrar");
-        itemMenuLojaCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        itemMenuClienteCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuClienteCadastrar.setMnemonic('a');
+        itemMenuClienteCadastrar.setText("Cadastrar");
+        itemMenuClienteCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuLojaCadastrarActionPerformed(evt);
+                itemMenuClienteCadastrarActionPerformed(evt);
             }
         });
-        menuLoja.add(itemMenuLojaCadastrar);
+        menuCliente.add(itemMenuClienteCadastrar);
 
-        jMenuBar1.add(menuLoja);
+        itemMenuClienteConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuClienteConsultar.setMnemonic('o');
+        itemMenuClienteConsultar.setText("Consultar");
+        itemMenuClienteConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuClienteConsultarActionPerformed(evt);
+            }
+        });
+        menuCliente.add(itemMenuClienteConsultar);
 
+        jMenuBar1.add(menuCliente);
+
+        menuPropostas.setMnemonic('p');
         menuPropostas.setText("Propostas");
 
+        itemMenuPropostasCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuPropostasCadastrar.setMnemonic('a');
         itemMenuPropostasCadastrar.setText("Cadastrar");
+        itemMenuPropostasCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuPropostasCadastrarActionPerformed(evt);
+            }
+        });
         menuPropostas.add(itemMenuPropostasCadastrar);
 
+        itemMenuPropostasConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuPropostasConsultar.setMnemonic('o');
         itemMenuPropostasConsultar.setText("Consultar");
         menuPropostas.add(itemMenuPropostasConsultar);
 
         jMenuBar1.add(menuPropostas);
-
-        menuCliente.setText("Cliente");
-
-        itemMenuClienteCadastrar.setText("Cadastrar");
-        menuCliente.add(itemMenuClienteCadastrar);
-
-        itemMenuClienteConsultar.setText("Consultar");
-        menuCliente.add(itemMenuClienteConsultar);
-
-        jMenuBar1.add(menuCliente);
 
         setJMenuBar(jMenuBar1);
 
@@ -136,16 +152,28 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuVeiculoCadastrarActionPerformed
 
     private void itemMenuVeiculoConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoConsultarActionPerformed
-        TelaConsultarVeiculo tela = new TelaConsultarVeiculo();
+        TelaConsultaVeiculo tela = new TelaConsultaVeiculo();
         
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuVeiculoConsultarActionPerformed
 
-    private void itemMenuLojaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuLojaCadastrarActionPerformed
-        TelaCadastroLoja tela = new TelaCadastroLoja();
+    private void itemMenuClienteCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuClienteCadastrarActionPerformed
+        TelaCadastroCliente tela = new TelaCadastroCliente();
         
         tela.setVisible(true);
-    }//GEN-LAST:event_itemMenuLojaCadastrarActionPerformed
+    }//GEN-LAST:event_itemMenuClienteCadastrarActionPerformed
+
+    private void itemMenuClienteConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuClienteConsultarActionPerformed
+        TelaConsultaCliente tela = new TelaConsultaCliente();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuClienteConsultarActionPerformed
+
+    private void itemMenuPropostasCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuPropostasCadastrarActionPerformed
+        TelaCadastroProposta tela = new TelaCadastroProposta();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuPropostasCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,7 +214,6 @@ public class TelaInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemMenuClienteCadastrar;
     private javax.swing.JMenuItem itemMenuClienteConsultar;
-    private javax.swing.JMenuItem itemMenuLojaCadastrar;
     private javax.swing.JMenuItem itemMenuPropostasCadastrar;
     private javax.swing.JMenuItem itemMenuPropostasConsultar;
     private javax.swing.JMenuItem itemMenuVeiculoCadastrar;
@@ -196,7 +223,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCliente;
     private javax.swing.JMenu menuEditar;
-    private javax.swing.JMenu menuLoja;
     private javax.swing.JMenu menuPropostas;
     private javax.swing.JMenu menuVeiculo;
     // End of variables declaration//GEN-END:variables

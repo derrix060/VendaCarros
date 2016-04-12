@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import model.Cliente;
+import model.Proposta;
 import model.Veiculo;
 
 /**
@@ -22,25 +24,48 @@ public class JsonToJava {
     private Gson gson = new Gson();
     
     public ArrayList<Veiculo> getVeiculos(){
-        ArrayList<Veiculo> retorno = new ArrayList<Veiculo>();
+        ArrayList<Veiculo> retorno = new ArrayList<>();
         Type t = new TypeToken<ArrayList<Veiculo>>(){}.getType();
         
         try{
             BufferedReader br = new BufferedReader(new FileReader("listaVeiculos.json"));
-            //ret = gson.fromJson(br, VeiculoController.class);
             retorno = gson.fromJson(br, t);
-            //System.out.println(ret);
-            //retorno = ret.filtrarVeiculo();
-            
-            System.out.println(retorno);
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        
-        
         return retorno;
-        
     }
+    
+    public ArrayList<Cliente> getClientes(){
+        ArrayList<Cliente> retorno = new ArrayList<>();
+        Type t = new TypeToken<ArrayList<Cliente>>(){}.getType();
+        
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("listaClientes.json"));
+            retorno = gson.fromJson(br, t);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return retorno;
+    }
+    
+    public ArrayList<Proposta> getPropostas(){
+        ArrayList<Proposta> retorno = new ArrayList<>();
+        Type t = new TypeToken<ArrayList<Proposta>>(){}.getType();
+        
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("listaPropostas.json"));
+            retorno = gson.fromJson(br, t);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return retorno;
+    }
+    
+    
+    
     
 }

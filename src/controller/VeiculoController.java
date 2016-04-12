@@ -19,40 +19,6 @@ public class VeiculoController {
         
         //pega a lista atualizada
             this.listaVeiculos = jsonJava.getVeiculos();
-        
-        /*
-            //Clio
-            Veiculo veiculoTemp = new Veiculo("Renault", "Clio", 2013, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"clio.jpg");
-            listaVeiculos.add(veiculoTemp);
-
-            //Corolla
-            veiculoTemp = new Veiculo("Toyota", "Corolla", 2015, "prata", "automatico", "1.0", "AAAA-0000", 0l, "", 75500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"corolla.jpg");
-            listaVeiculos.add(veiculoTemp);
-
-            //Fusion
-            veiculoTemp = new Veiculo("Ford", "Fusion", 2014, "preto", "automatico", "1.0", "AAAA-0000", 0l, "", 70500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"fusion.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-
-            //Gol
-            veiculoTemp = new Veiculo("Volkswagen", "Gol", 2012, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 15500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"gol.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-
-            //Ka
-            veiculoTemp = new Veiculo("Ford", "Ka", 2013, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 30500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"ka.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-
-            //Sandero
-            veiculoTemp = new Veiculo("Renault", "Sandero", 2014, "vermelho", "manual", "1.0", "AAAA-0000", 0l, "", 25500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"sandero.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-
-            //Uno
-            veiculoTemp = new Veiculo("Fiat", "Uno", 2013, "vermelho", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"uno.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-
-            //Up
-            veiculoTemp = new Veiculo("Volkswagen", "up", 2014, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"up.jpg");
-            this.listaVeiculos.add(veiculoTemp);
-        */
     }
     
     
@@ -85,6 +51,11 @@ public class VeiculoController {
             salvarLista();
         }
     }
+    
+    public boolean isValido(String modelo){
+        return indexVeiculo(modelo) != -1;
+    }
+    
     
     private int indexVeiculo(String modelo){
         for (int i = 0; i<listaVeiculos.size(); i++){
@@ -136,3 +107,38 @@ public class VeiculoController {
     }
     
 }//fim classe
+
+
+/*
+            //Clio
+            Veiculo veiculoTemp = new Veiculo("Renault", "Clio", 2013, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"clio.jpg");
+            listaVeiculos.add(veiculoTemp);
+
+            //Corolla
+            veiculoTemp = new Veiculo("Toyota", "Corolla", 2015, "prata", "automatico", "1.0", "AAAA-0000", 0l, "", 75500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"corolla.jpg");
+            listaVeiculos.add(veiculoTemp);
+
+            //Fusion
+            veiculoTemp = new Veiculo("Ford", "Fusion", 2014, "preto", "automatico", "1.0", "AAAA-0000", 0l, "", 70500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"fusion.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+
+            //Gol
+            veiculoTemp = new Veiculo("Volkswagen", "Gol", 2012, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 15500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"gol.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+
+            //Ka
+            veiculoTemp = new Veiculo("Ford", "Ka", 2013, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 30500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"ka.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+
+            //Sandero
+            veiculoTemp = new Veiculo("Renault", "Sandero", 2014, "vermelho", "manual", "1.0", "AAAA-0000", 0l, "", 25500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"sandero.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+
+            //Uno
+            veiculoTemp = new Veiculo("Fiat", "Uno", 2013, "vermelho", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"uno.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+
+            //Up
+            veiculoTemp = new Veiculo("Volkswagen", "up", 2014, "prata", "manual", "1.0", "AAAA-0000", 0l, "", 12500d, 0, true, "", true, true, true, true, true, true, true, true, true, true, true, true,"up.jpg");
+            this.listaVeiculos.add(veiculoTemp);
+        */
