@@ -24,23 +24,22 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="frameProposta1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="btnConsultar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="frameProposta1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="27" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="btnConsultar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+              <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnAlterarStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,6 +56,7 @@
                   <Component id="btnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAlterarStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -76,11 +76,12 @@
         <Component class="javax.swing.JTable" name="tblProposta">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
-                <Column editable="true" title="CPF" type="java.lang.String"/>
-                <Column editable="true" title="Modelo" type="java.lang.String"/>
-                <Column editable="true" title="Data" type="java.lang.String"/>
-                <Column editable="true" title="Valor" type="java.lang.Double"/>
+              <Table columnCount="5" rowCount="0">
+                <Column editable="false" title="CPF" type="java.lang.String"/>
+                <Column editable="false" title="Modelo" type="java.lang.String"/>
+                <Column editable="false" title="Data" type="java.lang.String"/>
+                <Column editable="false" title="Valor" type="java.lang.Double"/>
+                <Column editable="false" title="Realizado" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
@@ -99,11 +100,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVoltar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAlterarStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Alterar Status"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarStatusActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
