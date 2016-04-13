@@ -38,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menuVeiculo = new javax.swing.JMenu();
         itemMenuVeiculoCadastrar = new javax.swing.JMenuItem();
         itemMenuVeiculoConsultar = new javax.swing.JMenuItem();
+        itemMenuVeiculoListar = new javax.swing.JMenuItem();
         menuCliente = new javax.swing.JMenu();
         itemMenuClienteCadastrar = new javax.swing.JMenuItem();
         itemMenuClienteConsultar = new javax.swing.JMenuItem();
@@ -82,6 +83,16 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuVeiculo.add(itemMenuVeiculoConsultar);
 
+        itemMenuVeiculoListar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        itemMenuVeiculoListar.setMnemonic('i');
+        itemMenuVeiculoListar.setText("Listar");
+        itemMenuVeiculoListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuVeiculoListarActionPerformed(evt);
+            }
+        });
+        menuVeiculo.add(itemMenuVeiculoListar);
+
         jMenuBar1.add(menuVeiculo);
 
         menuCliente.setMnemonic('c');
@@ -125,6 +136,11 @@ public class TelaInicial extends javax.swing.JFrame {
         itemMenuPropostasConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         itemMenuPropostasConsultar.setMnemonic('o');
         itemMenuPropostasConsultar.setText("Consultar");
+        itemMenuPropostasConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuPropostasConsultarActionPerformed(evt);
+            }
+        });
         menuPropostas.add(itemMenuPropostasConsultar);
 
         jMenuBar1.add(menuPropostas);
@@ -152,7 +168,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuVeiculoCadastrarActionPerformed
 
     private void itemMenuVeiculoConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoConsultarActionPerformed
-        TelaConsultaVeiculo tela = new TelaConsultaVeiculo();
+        TelaVeiculo tela = new TelaVeiculo();
         
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuVeiculoConsultarActionPerformed
@@ -174,6 +190,18 @@ public class TelaInicial extends javax.swing.JFrame {
         
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuPropostasCadastrarActionPerformed
+
+    private void itemMenuPropostasConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuPropostasConsultarActionPerformed
+        TelaConsultaProposta tela = new TelaConsultaProposta();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuPropostasConsultarActionPerformed
+
+    private void itemMenuVeiculoListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoListarActionPerformed
+        TelaListarVeiculo tela = new TelaListarVeiculo();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_itemMenuVeiculoListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +246,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuPropostasConsultar;
     private javax.swing.JMenuItem itemMenuVeiculoCadastrar;
     private javax.swing.JMenuItem itemMenuVeiculoConsultar;
+    private javax.swing.JMenuItem itemMenuVeiculoListar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuArquivo;

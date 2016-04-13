@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.CPF;
 import controller.ClienteController;
 import javax.swing.JOptionPane;
 import model.Cliente;
@@ -34,6 +35,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,6 +60,13 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,10 +77,12 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                     .addComponent(frameCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConsultar)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVoltar)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -83,7 +94,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
                     .addComponent(btnLimpar)
-                    .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnAlterar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -112,6 +124,29 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if (!txtCPF.getText().equals("") && !txtNomeCompleto.getText().equals("") && !txtIdade.getText().equals("") && !txtDDD.getText().equals("") && !txtTelefone.getText().equals("")){
+            if (!CPF.isValidCPF(txtCPF.getText())){
+                JOptionPane.showMessageDialog(null, "CPF Inválido!!");
+            }
+            else{
+                Cliente c = new Cliente();
+                c.setCpf(txtCPF.getText());
+                c.setNomeCompleto(txtNomeCompleto.getText());
+                c.setIdade(Integer.parseInt(txtIdade.getText()));
+                c.setTelefone(Integer.parseInt(txtTelefone.getText()));
+                c.setDdd(Integer.parseInt(txtDDD.getText()));
+                
+                clienteController.alterarCliente(txtCPF.getText(), c);
+                
+                JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Está faltando algum campo!");
+            return;
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +185,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;

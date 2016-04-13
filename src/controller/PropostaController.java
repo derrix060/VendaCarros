@@ -23,9 +23,21 @@ public class PropostaController {
             this.listaPropostas = jsonJava.getPropostas();
     }
     
+    
     public void adicionarProposta(Proposta p){
         listaPropostas.add(p);
         salvarLista();
+    }
+    
+    public void alterarStatus(Proposta p){
+        Proposta temp = getProposta(p.getClinte().getCpf(), p.getveiculo().getModelo()).get(0);
+        
+        VeiculoController vc = new VeiculoController();
+        
+        vc.alterarDisponibilidade(temp.getveiculo().getModelo(), !temp.isRealizada());
+        
+        temp.setRealizada(!temp.isRealizada());
+        
     }
     
     public void salvarLista(){
@@ -33,22 +45,38 @@ public class PropostaController {
     }
     
     public ArrayList<Proposta> getProposta(String s){
-        if (CPF.isValidCPF(s)){
-            //consulta por cpf
-            
-        }else{
-            //consulta por modelo
-            
-        }
         ArrayList<Proposta> retorno = new ArrayList<>();
         
+        if (CPF.isValidCPF(s)){
+            //consulta por cpf
+            for(int i = 0; i<listaPropostas.size();i++){
+                if(listaPropostas.get(i).getClinte().getCpf().equals(s)){
+                    retorno.add(listaPropostas.get(i));
+                }
+            }
+        }else{
+            //consulta por modelo
+            for(int i = 0; i<listaPropostas.size();i++){
+                if(listaPropostas.get(i).getveiculo().getModelo().equals(s)){
+                    retorno.add(listaPropostas.get(i));
+                }
+            }
+        }
         
         return retorno;
     }
     
+    public ArrayList<Proposta> getProposta(){
+        return listaPropostas;
+    }
+    
     public ArrayList<Proposta> getProposta(String cpf, String modelo){
         ArrayList<Proposta> retorno = new ArrayList<>();
-        
+        for(int i = 0; i<listaPropostas.size();i++){
+            if(listaPropostas.get(i).getveiculo().getModelo().equals(modelo) && listaPropostas.get(i).getClinte().getCpf().equals(cpf)){
+                retorno.add(listaPropostas.get(i));
+            }
+        }
         
         return retorno;
     }

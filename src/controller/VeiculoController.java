@@ -49,6 +49,8 @@ public class VeiculoController {
         if (i != -1){
             listaVeiculos.get(i).setDisponivel(disponibilidade);
             salvarLista();
+        }else{
+            System.err.println("Não achei o veiculo " + modelo);
         }
     }
     
@@ -68,9 +70,53 @@ public class VeiculoController {
         return -1;
     }
     
+    public void alterarVeiculo(Veiculo antigo, Veiculo novo){
+        int i = indexVeiculo(antigo.getModelo());
+        
+        System.out.println("Passei");
+        
+        if (i!=-1){
+            listaVeiculos.get(i).setMarca(novo.getMarca());
+            listaVeiculos.get(i).setModelo(novo.getModelo());
+            listaVeiculos.get(i).setAno(novo.getAno());
+            listaVeiculos.get(i).setCor(novo.getCor());
+            listaVeiculos.get(i).setTransmissao(novo.getTransmissao());
+            listaVeiculos.get(i).setMotor(novo.getMotor());
+            listaVeiculos.get(i).setPlaca(novo.getPlaca());
+            listaVeiculos.get(i).setRenavam(novo.getRenavam());
+            listaVeiculos.get(i).setChassi(novo.getChassi());
+            listaVeiculos.get(i).setValorCompra(novo.getValorCompra());
+            listaVeiculos.get(i).setOdometro(novo.getOdometro());
+            listaVeiculos.get(i).setDisponivel(novo.isDisponivel());
+            listaVeiculos.get(i).setCategoria(novo.getCategoria());
+            listaVeiculos.get(i).setArCondicionado(novo.isArCondicionado());
+            listaVeiculos.get(i).setAbs(novo.isAbs());
+            listaVeiculos.get(i).setTetoSolar(novo.isTetoSolar());
+            listaVeiculos.get(i).setKitEletrico(novo.isKitEletrico());
+            listaVeiculos.get(i).setBancoCouro(novo.isBancoCouro());
+            listaVeiculos.get(i).setDirecaoHidraulica(novo.isDirecaoHidraulica());
+            listaVeiculos.get(i).setFarolMilha(novo.isFarolMilha());
+            listaVeiculos.get(i).setCentralMultimidia(novo.isCentralMultimidia());
+            listaVeiculos.get(i).setPilotoAutomatico(novo.isPilotoAutomatico());
+            listaVeiculos.get(i).setLuzDiurna(novo.isLuzDiurna());
+            listaVeiculos.get(i).setComandoVolante(novo.isComandoVolante());
+            listaVeiculos.get(i).setAirBag(novo.isAirBag());
+            
+            salvarLista();
+        }
+        
+    }
+    
     //filtrar veiculo
     public ArrayList<Veiculo> filtrarVeiculo(){
-        return listaVeiculos;
+        ArrayList<Veiculo> resposta = new ArrayList<>();
+        for(int i=0; i<listaVeiculos.size();i++){
+            if (listaVeiculos.get(i).isDisponivel()){
+                resposta.add(listaVeiculos.get(i));
+            }
+        }
+        
+        return resposta;
     }
     public ArrayList<Veiculo> filtrarVeiculo(String marca){
         ArrayList<Veiculo> resposta = new ArrayList<>();
@@ -94,6 +140,7 @@ public class VeiculoController {
         }
         return resposta;
     }
+    
     public ArrayList<Veiculo> filtrarVeiculo(double valorMaximo){
         ArrayList<Veiculo> resposta = new ArrayList<>();
         
@@ -103,6 +150,26 @@ public class VeiculoController {
                 resposta.add(listaVeiculos.get(i));
             }
         }
+        return resposta;
+    }
+    
+    public ArrayList<Veiculo> filtrarVeiculo(String marca, int anoMinimo, double valorMaximo){
+        ArrayList<Veiculo> resposta = new ArrayList<>();
+        
+        if(marca.equals("Todos")){
+            for(int i=0; i<listaVeiculos.size();i++){
+                if(listaVeiculos.get(i).getAno() >= anoMinimo && listaVeiculos.get(i).getValorCompra() <= valorMaximo && listaVeiculos.get(i).isDisponivel()){
+                    resposta.add(listaVeiculos.get(i));
+                }
+            }
+        }else{
+            for(int i=0; i<listaVeiculos.size();i++){
+                if(listaVeiculos.get(i).getMarca().equals(marca) && listaVeiculos.get(i).getAno() >= anoMinimo && listaVeiculos.get(i).getValorCompra() <= valorMaximo && listaVeiculos.get(i).isDisponivel()){
+                    resposta.add(listaVeiculos.get(i));
+                }
+            }
+        }
+        
         return resposta;
     }
     

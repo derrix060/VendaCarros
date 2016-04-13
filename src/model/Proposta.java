@@ -16,12 +16,22 @@ public class Proposta {
     Veiculo veiculo;
     String data;
     Double valor;
+    boolean realizada;
     
     //Constructor
     public Proposta() {
     }
     
     //Getters and Setters
+    public boolean isRealizada() {
+        return realizada;
+    }
+
+    public void setRealizada(boolean realizada) {
+        this.realizada = realizada;
+        veiculo.setDisponivel(!realizada);
+    }
+    
     public Cliente getClinte() {
         return cliente;
     }

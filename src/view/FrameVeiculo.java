@@ -19,6 +19,7 @@ public class FrameVeiculo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         txtValorCompra = new javax.swing.JTextField();
         lblOdometro = new javax.swing.JLabel();
         txtOdometro = new javax.swing.JTextField();
@@ -77,8 +78,10 @@ public class FrameVeiculo extends javax.swing.JPanel {
 
         lblLocalFoto.setText("Local Foto:");
 
+        buttonGroup1.add(rdDisponivelSim);
         rdDisponivelSim.setText("Sim");
 
+        buttonGroup1.add(rdDisponivelNao);
         rdDisponivelNao.setText("Não");
 
         lblCategoria.setText("Categoria");
@@ -225,7 +228,6 @@ public class FrameVeiculo extends javax.swing.JPanel {
         lblMarca.setText("Marca");
 
         cmbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Renault", "Ford", "Fiat", "Volkswagen", "Chevrolet", "Toyota", "Hyundai", "Honda", "BMW", "Mercedes", "Audi" }));
-        cmbMarca.setSelectedIndex(-1);
         cmbMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbMarcaActionPerformed(evt);
@@ -442,6 +444,7 @@ public class FrameVeiculo extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JCheckBox chkABS;
     public static javax.swing.JCheckBox chkAirBag;
     public static javax.swing.JCheckBox chkArCondicionado;

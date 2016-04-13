@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package view;
+import controller.PropostaController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Proposta;
 import static view.FrameProposta.*;
 
 /**
@@ -11,12 +16,12 @@ import static view.FrameProposta.*;
  * @author mario
  */
 public class TelaConsultaProposta extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FrameConsultaProposta
-     */
+    PropostaController propostaController = new PropostaController();
+    DefaultTableModel dtm = new DefaultTableModel(new String[] {"CPF","Modelo","Data","Valor","Realizado"}, 0);
+    
     public TelaConsultaProposta() {
         initComponents();
+        tblProposta.setModel(dtm);
     }
 
     /**
@@ -34,6 +39,7 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnAlterarStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -42,15 +48,22 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CPF", "Modelo", "Data", "Valor"
+                "CPF", "Modelo", "Data", "Valor", "Realizado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblProposta);
@@ -63,28 +76,46 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnAlterarStatus.setText("Alterar Status");
+        btnAlterarStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnConsultar)
-                        .addGap(82, 82, 82)
-                        .addComponent(btnLimpar)
-                        .addGap(99, 99, 99)
-                        .addComponent(btnVoltar)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(btnConsultar)
+                .addGap(72, 72, 72)
+                .addComponent(btnLimpar)
+                .addGap(89, 89, 89)
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAlterarStatus)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +128,8 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
                     .addComponent(btnLimpar)
-                    .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnAlterarStatus))
                 .addGap(17, 17, 17))
         );
 
@@ -105,20 +137,60 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        //Limpar dados antigos
+            limparTabela();
+        
+        
         String cpf = txtCPF.getText();
         String modelo = txtModelo.getText();
+        ArrayList<Proposta> propostas = new ArrayList<>();
         
         if (!cpf.equals("") && !modelo.equals("")){
-            
+            propostas = propostaController.getProposta(cpf, modelo);
         }else if(!cpf.equals("")){
-            
+            propostas = propostaController.getProposta(cpf);
         }else if(!modelo.equals("")){
-            
+            propostas = propostaController.getProposta(modelo);
         }else{
-            
+            propostas = propostaController.getProposta();
         }
+        
+        for (int i=0; i<propostas.size();i++){
+            //{"CPF","Modelo","Data","Valor"}
+            dtm.addRow(new Object[]{propostas.get(i).getClinte().getCpf(), propostas.get(i).getveiculo().getModelo(), propostas.get(i).getData(), propostas.get(i).getValor(), propostas.get(i).isRealizada()});
+        }
+        
+        
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        FrameProposta.limparCampos();
+        limparTabela();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnAlterarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarStatusActionPerformed
+        int row = tblProposta.getSelectedRow();
+        String cpf = tblProposta.getValueAt(row, 0).toString();
+        String modelo = tblProposta.getValueAt(row, 1).toString();
+        
+        Boolean valido = Boolean.getBoolean(tblProposta.getValueAt(row, 4).toString());
+        
+        System.out.println(valido);
+        Proposta p = propostaController.getProposta(cpf, modelo).get(0);
+        propostaController.alterarStatus(p);
+        
+        btnConsultarActionPerformed(evt);
+    }//GEN-LAST:event_btnAlterarStatusActionPerformed
+
+    
+    void limparTabela(){
+        dtm.setRowCount(0);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -156,6 +228,7 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarStatus;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;

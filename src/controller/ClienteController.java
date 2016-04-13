@@ -27,6 +27,20 @@ public class ClienteController {
         javaJson.salvarClientes(listaClientes);
     }
     
+    public void alterarCliente(String cpf, Cliente c){
+        int i = indexCliente(cpf);
+        
+        if (i!=-1){
+            listaClientes.get(i).setCpf(c.getCpf());
+            listaClientes.get(i).setNomeCompleto(c.getNomeCompleto());
+            listaClientes.get(i).setIdade(c.getIdade());
+            listaClientes.get(i).setDdd(c.getDdd());
+            listaClientes.get(i).setTelefone(c.getTelefone());
+            
+            salvarLista();
+        }
+    }
+    
     public Cliente getCliente(String cpf){
         int i = indexCliente(cpf);
         if (i!= -1){
