@@ -6,6 +6,7 @@
 package view;
 
 import controller.VeiculoController;
+import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.Veiculo;
@@ -22,7 +23,17 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
         initComponents();
         txtLocalFoto.setVisible(false);
         lblLocalFoto.setVisible(false);
+    }
+    
+    public TelaConsultaVeiculo(Veiculo v) {
+        initComponents();
+        txtLocalFoto.setVisible(false);
+        lblLocalFoto.setVisible(false);
+        //esconde botao filtrar
+        btnConsultar.setVisible(false);
+        txtModelo.setText(v.getModelo());
         
+        consultarVeiculo();
     }
     
 
@@ -39,6 +50,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         veiculo1 = new view.FrameVeiculo();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,6 +75,13 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,15 +89,19 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(veiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(veiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114)
+                        .addGap(47, 47, 47)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(85, 85, 85)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +112,8 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConsultar)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlterar))
                 .addGap(19, 19, 19))
         );
 
@@ -101,6 +125,14 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        consultarVeiculo();
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        FrameVeiculo.limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+    
+    private void consultarVeiculo(){
         Veiculo v = veiculoController.getVeiculo(FrameVeiculo.txtModelo.getText());
         
         if (v == null){
@@ -144,12 +176,56 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
             
             lblFoto.setIcon(new ImageIcon(getClass().getResource("/fotosCarros/" + v.getNomeImagem())));
         }
+    }
+    
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Veiculo v = veiculoController.getVeiculo(FrameVeiculo.txtModelo.getText());
         
-    }//GEN-LAST:event_btnConsultarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        FrameVeiculo.limparCampos();
-    }//GEN-LAST:event_btnLimparActionPerformed
+        
+        if (v == null){
+            JOptionPane.showMessageDialog(null, "Veículo não localizado!!", "Warning",JOptionPane.WARNING_MESSAGE);
+        }else{
+            
+            Veiculo veiculo = new Veiculo();
+            
+            veiculo.setMarca(cmbMarca.getSelectedItem().toString());
+            veiculo.setModelo(txtModelo.getText());
+            veiculo.setAno(Integer.parseInt(txtAno.getText()));
+            veiculo.setCor(cmbCor.getSelectedItem().toString());
+        System.out.println("Passei 0");
+            veiculo.setTransmissao(cmbTransmissao.getSelectedItem().toString());
+            veiculo.setMotor(txtMotor.getText());
+            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setRenavam(Long.parseLong(txtRenavam.getText()));
+            veiculo.setChassi(txtChassi.getText());
+            veiculo.setValorCompra(Double.parseDouble(txtValorCompra.getText()));
+            veiculo.setOdometro(Integer.parseInt(txtOdometro.getText()));
+            veiculo.setDisponivel(chkDirecaoHidraulica.isSelected());
+            veiculo.setCategoria(cmbCategoria.getSelectedItem().toString());
+            veiculo.setArCondicionado(chkArCondicionado.isSelected());
+            System.out.println("Passei 1");
+            veiculo.setAbs(chkABS.isSelected());
+            veiculo.setTetoSolar(chkTetoSolar.isSelected());
+            veiculo.setKitEletrico(chkKitEletrico.isSelected());
+            veiculo.setBancoCouro(chkBancoCouro.isSelected());
+            veiculo.setDirecaoHidraulica(chkDirecaoHidraulica.isSelected());
+            veiculo.setFarolMilha(chkFarolMilha.isSelected());
+            veiculo.setCentralMultimidia(chkCentralMultimidia.isSelected());
+            veiculo.setPilotoAutomatico(chkPilotoAutomatico.isSelected());
+            System.out.println("Passei 2");
+            veiculo.setLuzDiurna(chkLuzDiurna.isSelected());
+            veiculo.setComandoVolante(chkComandoVolante.isSelected());
+            veiculo.setAirBag(chkAirBag.isSelected());
+            
+            System.out.println("Passei 10");
+            
+            veiculoController.alterarVeiculo(v, veiculo);
+            
+            JOptionPane.showMessageDialog(null, "Veículo alterado com sucesso!");
+            
+        }
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +254,12 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -188,6 +270,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;

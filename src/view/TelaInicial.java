@@ -168,7 +168,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuVeiculoCadastrarActionPerformed
 
     private void itemMenuVeiculoConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVeiculoConsultarActionPerformed
-        TelaVeiculo tela = new TelaVeiculo();
+        TelaConsultaVeiculo tela = new TelaConsultaVeiculo();
         
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuVeiculoConsultarActionPerformed
@@ -192,7 +192,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_itemMenuPropostasCadastrarActionPerformed
 
     private void itemMenuPropostasConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuPropostasConsultarActionPerformed
-        TelaConsultaProposta tela = new TelaConsultaProposta();
+        TelaListarProposta tela = new TelaListarProposta();
         
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuPropostasConsultarActionPerformed

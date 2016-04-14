@@ -46,9 +46,13 @@ public class VeiculoController {
     
     public void alterarDisponibilidade(String modelo, boolean disponibilidade){
         int i = indexVeiculo(modelo);
+        System.out.println("Modelo param: " + modelo);
+        System.out.println("Disponibilidade param: " + disponibilidade);
+        System.out.println("Disponibilidade antes: " + listaVeiculos.get(i).isDisponivel());
         if (i != -1){
             listaVeiculos.get(i).setDisponivel(disponibilidade);
             salvarLista();
+            System.out.println("Disponibilidade depois: " + listaVeiculos.get(i).isDisponivel());
         }else{
             System.err.println("Não achei o veiculo " + modelo);
         }

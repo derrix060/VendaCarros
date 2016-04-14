@@ -4,24 +4,35 @@
  * and open the template in the editor.
  */
 package view;
+
+import controller.ClienteController;
 import controller.PropostaController;
-import java.util.ArrayList;
+import controller.VeiculoController;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import model.Cliente;
 import model.Proposta;
 import static view.FrameProposta.*;
 
 /**
  *
- * @author mario
+ * @author aluno
  */
 public class TelaConsultaProposta extends javax.swing.JFrame {
-    PropostaController propostaController = new PropostaController();
-    DefaultTableModel dtm = new DefaultTableModel(new String[] {"CPF","Modelo","Data","Valor","Realizado"}, 0);
-    
-    public TelaConsultaProposta() {
+    private static Proposta p;
+    private PropostaController propostaController = new PropostaController();
+    /**
+     * Creates new form TelaConsultaProposta
+     * @param p
+     */
+    public TelaConsultaProposta(Proposta p) {
+        this.p = p;
         initComponents();
-        tblProposta.setModel(dtm);
+        
+        txtCPF.setText(p.getClinte().getCpf());
+        txtData.setText(p.getData());
+        txtModelo.setText(p.getveiculo().getModelo());
+        txtValor.setText(p.getValor().toString());
+        
     }
 
     /**
@@ -34,51 +45,15 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
     private void initComponents() {
 
         frameProposta1 = new view.FrameProposta();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblProposta = new javax.swing.JTable();
-        btnConsultar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        btnAlterarStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tblProposta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "CPF", "Modelo", "Data", "Valor", "Realizado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblProposta);
-
-        btnConsultar.setText("Consultar");
-        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarActionPerformed(evt);
-            }
-        });
-
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -89,108 +64,57 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
             }
         });
 
-        btnAlterarStatus.setText("Alterar Status");
-        btnAlterarStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarStatusActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(btnConsultar)
-                .addGap(72, 72, 72)
-                .addComponent(btnLimpar)
-                .addGap(89, 89, 89)
-                .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAlterarStatus)
-                .addGap(60, 60, 60))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAlterar)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnVoltar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameProposta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnAlterarStatus))
-                .addGap(17, 17, 17))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnVoltar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        //Limpar dados antigos
-            limparTabela();
-        
-        
-        String cpf = txtCPF.getText();
-        String modelo = txtModelo.getText();
-        ArrayList<Proposta> propostas = new ArrayList<>();
-        
-        if (!cpf.equals("") && !modelo.equals("")){
-            propostas = propostaController.getProposta(cpf, modelo);
-        }else if(!cpf.equals("")){
-            propostas = propostaController.getProposta(cpf);
-        }else if(!modelo.equals("")){
-            propostas = propostaController.getProposta(modelo);
-        }else{
-            propostas = propostaController.getProposta();
-        }
-        
-        for (int i=0; i<propostas.size();i++){
-            //{"CPF","Modelo","Data","Valor"}
-            dtm.addRow(new Object[]{propostas.get(i).getClinte().getCpf(), propostas.get(i).getveiculo().getModelo(), propostas.get(i).getData(), propostas.get(i).getValor(), propostas.get(i).isRealizada()});
-        }
-        
-        
-    }//GEN-LAST:event_btnConsultarActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        limparCampos();
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        FrameProposta.limparCampos();
-        limparTabela();
-    }//GEN-LAST:event_btnLimparActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Proposta nova = new Proposta();
+        ClienteController cc = new ClienteController();
+        VeiculoController vc = new VeiculoController();
+        
+        nova.setCliente(cc.getCliente(txtCPF.getText()));
+        nova.setVeiculo(vc.getVeiculo(txtModelo.getText()));
+        nova.setData(txtData.getText());
+        nova.setValor(Double.parseDouble(txtValor.getText()));
+        
+        propostaController.alterarProposta(p, nova);
+        
+        JOptionPane.showMessageDialog(null, "Proposta alterada com sucesso!!");
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnAlterarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarStatusActionPerformed
-        int row = tblProposta.getSelectedRow();
-        String cpf = tblProposta.getValueAt(row, 0).toString();
-        String modelo = tblProposta.getValueAt(row, 1).toString();
-        
-        Boolean valido = Boolean.getBoolean(tblProposta.getValueAt(row, 4).toString());
-        
-        System.out.println(valido);
-        Proposta p = propostaController.getProposta(cpf, modelo).get(0);
-        propostaController.alterarStatus(p);
-        
-        btnConsultarActionPerformed(evt);
-    }//GEN-LAST:event_btnAlterarStatusActionPerformed
-
-    
-    void limparTabela(){
-        dtm.setRowCount(0);
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -217,23 +141,18 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaConsultaProposta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaConsultaProposta().setVisible(true);
+                new TelaConsultaProposta(p).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterarStatus;
-    private javax.swing.JButton btnConsultar;
-    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnVoltar;
     private view.FrameProposta frameProposta1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProposta;
     // End of variables declaration//GEN-END:variables
 }

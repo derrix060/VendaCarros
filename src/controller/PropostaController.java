@@ -29,14 +29,35 @@ public class PropostaController {
         salvarLista();
     }
     
+    public void alterarProposta(Proposta antiga, Proposta nova){
+        int index = -1;
+        for (int i=0;i<listaPropostas.size();i++){
+            if(listaPropostas.get(i).getClinte().getCpf().equals(antiga.getClinte().getCpf()) && listaPropostas.get(i).getveiculo().getModelo().equals(antiga.getveiculo().getModelo())) {
+                index = i;
+            }
+        }
+        
+        if(index != -1){
+            listaPropostas.remove(index);
+            listaPropostas.add(nova);
+        }else{
+            System.err.println("Não foi possível achar a Proposta!");
+            return;
+        }
+        
+        salvarLista();
+    }
+    
     public void alterarStatus(Proposta p){
         Proposta temp = getProposta(p.getClinte().getCpf(), p.getveiculo().getModelo()).get(0);
         
         VeiculoController vc = new VeiculoController();
         
-        vc.alterarDisponibilidade(temp.getveiculo().getModelo(), !temp.isRealizada());
+        vc.alterarDisponibilidade(temp.getveiculo().getModelo(), temp.isRealizada());
         
         temp.setRealizada(!temp.isRealizada());
+        
+        salvarLista();
         
     }
     
@@ -75,6 +96,24 @@ public class PropostaController {
         for(int i = 0; i<listaPropostas.size();i++){
             if(listaPropostas.get(i).getveiculo().getModelo().equals(modelo) && listaPropostas.get(i).getClinte().getCpf().equals(cpf)){
                 retorno.add(listaPropostas.get(i));
+            }
+        }
+        
+        return retorno;
+    }
+    
+    public ArrayList<Proposta> getProposta(Double valor, boolean minimo){
+        ArrayList<Proposta> retorno = new ArrayList<>();
+        
+        for(int i = 0; i<listaPropostas.size();i++){
+            if(minimo){
+                if(listaPropostas.get(i).getveiculo().getValorCompra() >= valor){
+                    retorno.add(listaPropostas.get(i));
+                }
+            }else{
+                if(listaPropostas.get(i).getveiculo().getValorCompra() <= valor){
+                    retorno.add(listaPropostas.get(i));
+                }
             }
         }
         
