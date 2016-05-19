@@ -5,8 +5,10 @@
  */
 package view;
 
-import controller.CPF;
 import controller.ClienteController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import static view.FrameCliente.*;
@@ -105,21 +107,23 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Cliente cli = new Cliente();
+        boolean ok;
 
-        //Valida CPF
-        if (!CPF.isValidCPF(txtCPF.getText())){
-            JOptionPane.showMessageDialog(null, "CPF Inválido!!", "Warning",JOptionPane.WARNING_MESSAGE);
-        }else{
-            cli.setCpf(txtCPF.getText());
-            cli.setNomeCompleto(txtNomeCompleto.getText());
-            cli.setIdade(Integer.parseInt(txtIdade.getText()));
-            cli.setTelefone(Integer.parseInt(txtTelefone.getText()));
-            cli.setDdd(Integer.parseInt(txtDDD.getText()));
-            
-            clienteController.adicionarCliente(cli);
-            
-            FrameCliente.limparCampos();
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+        cli.setCpf(txtCPF.getText());
+        cli.setNomeCompleto(txtNomeCompleto.getText());
+        cli.setIdade(Integer.parseInt(txtIdade.getText()));
+        cli.setTelefone(Integer.parseInt(txtTelefone.getText()));
+        cli.setDdd(Integer.parseInt(txtDDD.getText()));
+        
+        try {
+            if(clienteController.adicionarCliente(cli)){
+                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+                FrameCliente.limparCampos();
+            }else
+                JOptionPane.showMessageDialog(null, "Cliente não foi cadastrado!!");
+        
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

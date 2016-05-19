@@ -42,6 +42,12 @@ public class FrameCliente extends javax.swing.JPanel {
 
         lblCPF.setText("CPF:");
 
+        txtCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFActionPerformed(evt);
+            }
+        });
+
         lblNomeCompleto.setText("Nome Completo:");
 
         lblIdade.setText("Idade:");
@@ -100,6 +106,10 @@ public class FrameCliente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPFActionPerformed
 
     public static void limparCampos(){
         txtCPF.setText("");

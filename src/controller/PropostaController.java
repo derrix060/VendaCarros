@@ -122,9 +122,9 @@ public class PropostaController {
     
     public boolean isValido(String modelo, String cpf){
         boolean v = new VeiculoController().isValido(modelo);
-        boolean c = new ClienteController().isValido(cpf);
+        //boolean c = new ClienteController().isValido(cpf);
         
-        return (v && c);
+        return (v);// && c);
     }
     
     
