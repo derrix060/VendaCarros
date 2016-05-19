@@ -7,6 +7,9 @@ package view;
 
 import controller.CPF;
 import controller.ClienteController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import static view.FrameCliente.*;
@@ -39,7 +42,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnConsultar.setText("Consultar");
+        btnConsultar.setText("Consultar CPF");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
@@ -72,17 +75,19 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(frameCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(frameCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConsultar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAlterar)
+                        .addGap(14, 14, 14)
+                        .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVoltar)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -94,8 +99,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
                     .addComponent(btnLimpar)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnAlterar))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnVoltar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -103,18 +108,23 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        Cliente c = clienteController.getCliente(txtCPF.getText());
-        
-        if (c == null){
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado!!", "Warning",JOptionPane.WARNING_MESSAGE);
-        }else{
-            txtCPF.setText(c.getCpf());
-            txtNomeCompleto.setText(c.getNomeCompleto());
-            txtIdade.setText(Integer.toString(c.getIdade()));
-            txtDDD.setText(Integer.toString(c.getDdd()));
-            txtTelefone.setText(Integer.toString(c.getTelefone()));
-            
+        Cliente c;
+        try {
+            c = clienteController.getCliente(txtCPF.getText());
+            if (c == null){
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!!", "Warning",JOptionPane.WARNING_MESSAGE);
+            }else{
+                txtCPF.setText(c.getCpf());
+                txtNomeCompleto.setText(c.getNomeCompleto());
+                txtIdade.setText(Integer.toString(c.getIdade()));
+                txtDDD.setText(Integer.toString(c.getDdd()));
+                txtTelefone.setText(Integer.toString(c.getTelefone()));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelaConsultaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -138,7 +148,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                 c.setTelefone(Integer.parseInt(txtTelefone.getText()));
                 c.setDdd(Integer.parseInt(txtDDD.getText()));
                 
-                clienteController.alterarCliente(txtCPF.getText(), c);
+                //clienteController.alterarCliente(txtCPF.getText(), c);
                 
                 JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
             }

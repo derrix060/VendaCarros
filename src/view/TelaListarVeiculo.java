@@ -215,7 +215,11 @@ public class TelaListarVeiculo extends javax.swing.JFrame {
         }
         
         for (int i=0; i<veiculos.size();i++){
-            dtm.addRow(new Object[]{veiculos.get(i).getMarca(),veiculos.get(i).getModelo(),veiculos.get(i).getAno(),veiculos.get(i).getValorCompra()});
+            dtm.addRow(new Object[]{
+                veiculos.get(i).getMarca(),
+                veiculos.get(i).getModelo(),
+                veiculos.get(i).getAno(),
+                veiculos.get(i).getValorCompra()});
         }
         
         

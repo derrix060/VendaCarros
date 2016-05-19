@@ -1,66 +1,41 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Cliente;
+import model.DAO.ClienteDAO;
+import static view.FrameCliente.txtCPF;
 
 /**
  *
  * @author mario
  */
 public class ClienteController {
-    private final JavaToJson javaJson = new JavaToJson();
-    private final JsonToJava jsonJava = new JsonToJava();
-    private  ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private final ClienteDAO clienteDAO = new ClienteDAO();
     
     //Constructor
     public ClienteController() {
-        //pega a lista atualizada
-            this.listaClientes = jsonJava.getClientes();
     }
     
-    public void adicionarCliente(Cliente c){
-        listaClientes.add(c);
-        salvarLista();
+    public boolean adicionarCliente(Cliente c) throws ClassNotFoundException, SQLException{
+        //validar possíveis regras de negócio
+        //Valida CPF
+        if (!CPF.isValidCPF(txtCPF.getText())){
+            JOptionPane.showMessageDialog(null, "CPF Inválido!!", "Warning",JOptionPane.WARNING_MESSAGE);
+            return false;
+        }else
+            return clienteDAO.insertCliente(c);
     }
     
-    public void salvarLista(){
-        javaJson.salvarClientes(listaClientes);
+    public Cliente getCliente (String cpf) throws ClassNotFoundException, SQLException{
+        return clienteDAO.selectClientePorCPF(cpf);
     }
     
-    public void alterarCliente(String cpf, Cliente c){
-        int i = indexCliente(cpf);
-        
-        if (i!=-1){
-            listaClientes.get(i).setCpf(c.getCpf());
-            listaClientes.get(i).setNomeCompleto(c.getNomeCompleto());
-            listaClientes.get(i).setIdade(c.getIdade());
-            listaClientes.get(i).setDdd(c.getDdd());
-            listaClientes.get(i).setTelefone(c.getTelefone());
-            
-            salvarLista();
-        }
+    public ArrayList<Cliente> getAllClients() throws ClassNotFoundException, SQLException{
+        return clienteDAO.selectAll();
     }
-    
-    public Cliente getCliente(String cpf){
-        int i = indexCliente(cpf);
-        if (i!= -1){
-            return listaClientes.get(i);
-        }
-        return null;
-    }
-    
-    public boolean isValido(String cpf){
-        return indexCliente(cpf) != -1;
-    }
-    
-    private int indexCliente(String cpf){
-        for (int i = 0; i<listaClientes.size(); i++){
-            if (listaClientes.get(i).getCpf().equals(cpf)){
-                return i;
-            }
-        }
-        
-        System.err.println("Cliente não encontrado!");
-        return -1;
-    }
+    //alterarCliente
+    //getCliente (cpf)
+   
 }

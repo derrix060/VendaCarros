@@ -42,6 +42,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menuCliente = new javax.swing.JMenu();
         itemMenuClienteCadastrar = new javax.swing.JMenuItem();
         itemMenuClienteConsultar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuPropostas = new javax.swing.JMenu();
         itemMenuPropostasCadastrar = new javax.swing.JMenuItem();
         itemMenuPropostasConsultar = new javax.swing.JMenuItem();
@@ -117,6 +118,15 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         menuCliente.add(itemMenuClienteConsultar);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Listar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuCliente.add(jMenuItem1);
 
         jMenuBar1.add(menuCliente);
 
@@ -203,6 +213,12 @@ public class TelaInicial extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuVeiculoListarActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaListarCliente tela = new TelaListarCliente();
+        
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,6 +265,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuVeiculoListar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCliente;
     private javax.swing.JMenu menuEditar;
