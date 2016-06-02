@@ -203,7 +203,7 @@ public class TelaListarVeiculo extends javax.swing.JFrame {
         
         if(cmbMarca.getSelectedIndex() == 0 && txtAno.getText().equals("") && txtValor.getText().equals("")){
             //Tudo
-            veiculos = veiculoController.filtrarVeiculo();
+            veiculos = veiculoController.listarTodosVeiculos();
         }else{
             marca = cmbMarca.getSelectedItem().toString();
             //modelo = txtModelo.getText();

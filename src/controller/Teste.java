@@ -5,8 +5,6 @@
  */
 package controller;
 
-import java.util.ArrayList;
-import model.Veiculo;
 
 /**
  *
@@ -14,19 +12,10 @@ import model.Veiculo;
  */
 public class Teste {
     public static void main (String[]args){
-        ArrayList<Veiculo> teste = new ArrayList<>();
+        VeiculoController vc = new VeiculoController();
         
-        JsonToJava jsonJava = new JsonToJava();
-        JavaToJson javaJson = new JavaToJson();
-        
-        
-        teste = jsonJava.getVeiculos();
-        /*
-        for (int i=0; i< teste.size();i++){
-            System.out.println(teste.get(i).getModelo());
-        }
-        */
-        //javaJson.salvarVeiculo(teste);
+        //Criar Banco de Dados
+        //vc.jsonToDB();
         
         
     }

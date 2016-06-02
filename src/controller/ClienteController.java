@@ -1,66 +1,50 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Cliente;
+import model.ClienteDAO;
 
 /**
  *
  * @author mario
  */
 public class ClienteController {
-    private final JavaToJson javaJson = new JavaToJson();
-    private final JsonToJava jsonJava = new JsonToJava();
-    private  ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private final ClienteDAO cliDAO = new ClienteDAO();
     
-    //Constructor
-    public ClienteController() {
-        //pega a lista atualizada
-            this.listaClientes = jsonJava.getClientes();
+    public ArrayList<Cliente> listarClientes(){
+        try {
+            return cliDAO.listarTodosClientes();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
-    
-    public void adicionarCliente(Cliente c){
-        listaClientes.add(c);
-        salvarLista();
-    }
-    
-    public void salvarLista(){
-        javaJson.salvarClientes(listaClientes);
+   
+    public void adicionarCliente(Cliente c) throws SQLException, ClassNotFoundException{
+        cliDAO.inserirNovoCliente(c);
     }
     
     public void alterarCliente(String cpf, Cliente c){
-        int i = indexCliente(cpf);
-        
-        if (i!=-1){
-            listaClientes.get(i).setCpf(c.getCpf());
-            listaClientes.get(i).setNomeCompleto(c.getNomeCompleto());
-            listaClientes.get(i).setIdade(c.getIdade());
-            listaClientes.get(i).setDdd(c.getDdd());
-            listaClientes.get(i).setTelefone(c.getTelefone());
-            
-            salvarLista();
+        try {
+            cliDAO.alterarDadosCLiente(c);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public Cliente getCliente(String cpf){
-        int i = indexCliente(cpf);
-        if (i!= -1){
-            return listaClientes.get(i);
+        try {
+            return cliDAO.buscarClienteCpf(cpf);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
     
     public boolean isValido(String cpf){
-        return indexCliente(cpf) != -1;
-    }
-    
-    private int indexCliente(String cpf){
-        for (int i = 0; i<listaClientes.size(); i++){
-            if (listaClientes.get(i).getCpf().equals(cpf)){
-                return i;
-            }
-        }
-        
-        System.err.println("Cliente não encontrado!");
-        return -1;
+        return getCliente(cpf)!= null;
     }
 }

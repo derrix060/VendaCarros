@@ -165,10 +165,7 @@ public class TelaVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        Veiculo v = veiculoController.getVeiculo(FrameVeiculo.txtModelo.getText());
-        
-        
-        if (v == null){
+        if(veiculoController.isValido(FrameVeiculo.txtModelo.getText())){
             JOptionPane.showMessageDialog(null, "Veículo não localizado!!", "Warning",JOptionPane.WARNING_MESSAGE);
         }else{
             
@@ -178,7 +175,6 @@ public class TelaVeiculo extends javax.swing.JFrame {
             veiculo.setModelo(txtModelo.getText());
             veiculo.setAno(Integer.parseInt(txtAno.getText()));
             veiculo.setCor(cmbCor.getSelectedItem().toString());
-        System.out.println("Passei 0");
             veiculo.setTransmissao(cmbTransmissao.getSelectedItem().toString());
             veiculo.setMotor(txtMotor.getText());
             veiculo.setPlaca(txtPlaca.getText());
@@ -189,7 +185,6 @@ public class TelaVeiculo extends javax.swing.JFrame {
             veiculo.setDisponivel(chkDirecaoHidraulica.isSelected());
             veiculo.setCategoria(cmbCategoria.getSelectedItem().toString());
             veiculo.setArCondicionado(chkArCondicionado.isSelected());
-            System.out.println("Passei 1");
             veiculo.setAbs(chkABS.isSelected());
             veiculo.setTetoSolar(chkTetoSolar.isSelected());
             veiculo.setKitEletrico(chkKitEletrico.isSelected());
@@ -198,14 +193,12 @@ public class TelaVeiculo extends javax.swing.JFrame {
             veiculo.setFarolMilha(chkFarolMilha.isSelected());
             veiculo.setCentralMultimidia(chkCentralMultimidia.isSelected());
             veiculo.setPilotoAutomatico(chkPilotoAutomatico.isSelected());
-            System.out.println("Passei 2");
             veiculo.setLuzDiurna(chkLuzDiurna.isSelected());
             veiculo.setComandoVolante(chkComandoVolante.isSelected());
             veiculo.setAirBag(chkAirBag.isSelected());
             
-            System.out.println("Passei 10");
             
-            veiculoController.alterarVeiculo(v, veiculo);
+            veiculoController.alterarVeiculo(veiculo);
             
             JOptionPane.showMessageDialog(null, "Veículo alterado com sucesso!");
             

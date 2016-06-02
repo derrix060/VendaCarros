@@ -5,7 +5,10 @@
  */
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Proposta;
 
 /**
@@ -53,7 +56,11 @@ public class PropostaController {
         
         VeiculoController vc = new VeiculoController();
         
-        vc.alterarDisponibilidade(temp.getveiculo().getModelo(), temp.isRealizada());
+        try {
+            vc.alterarDisponibilidade(temp.getveiculo(), temp.isRealizada());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PropostaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         temp.setRealizada(!temp.isRealizada());
         

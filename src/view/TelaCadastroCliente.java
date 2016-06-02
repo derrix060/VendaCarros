@@ -7,6 +7,9 @@ package view;
 
 import controller.CPF;
 import controller.ClienteController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import static view.FrameCliente.*;
@@ -116,7 +119,13 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             cli.setTelefone(Integer.parseInt(txtTelefone.getText()));
             cli.setDdd(Integer.parseInt(txtDDD.getText()));
             
-            clienteController.adicionarCliente(cli);
+            try {
+                clienteController.adicionarCliente(cli);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar Cliente!!");
+                return;
+            }
             
             FrameCliente.limparCampos();
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
