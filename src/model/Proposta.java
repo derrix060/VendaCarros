@@ -5,7 +5,10 @@
  */
 package model;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +23,7 @@ public class Proposta {
     
     //Constructor
     public Proposta() {
+        
     }
     
     //Getters and Setters
@@ -29,7 +33,6 @@ public class Proposta {
 
     public void setRealizada(boolean realizada) {
         this.realizada = realizada;
-        veiculo.setDisponivel(!realizada);
     }
     
     public Cliente getClinte() {
@@ -40,7 +43,7 @@ public class Proposta {
         this.cliente = cliente;
     }
 
-    public Veiculo getveiculo() {
+    public Veiculo getVeiculo() {
         return veiculo;
     }
 
