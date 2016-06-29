@@ -8,6 +8,9 @@ package view;
 import controller.ClienteController;
 import controller.PropostaController;
 import controller.VeiculoController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Proposta;
@@ -30,7 +33,7 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
         
         txtCPF.setText(p.getClinte().getCpf());
         txtData.setText(p.getData());
-        txtModelo.setText(p.getveiculo().getModelo());
+        txtModelo.setText(p.getVeiculo().getModelo());
         txtValor.setText(p.getValor().toString());
         
     }
@@ -100,18 +103,22 @@ public class TelaConsultaProposta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        Proposta nova = new Proposta();
-        ClienteController cc = new ClienteController();
-        VeiculoController vc = new VeiculoController();
-        
-        nova.setCliente(cc.getCliente(txtCPF.getText()));
-        nova.setVeiculo(vc.getVeiculo(txtModelo.getText()));
-        nova.setData(txtData.getText());
-        nova.setValor(Double.parseDouble(txtValor.getText()));
-        
-        propostaController.alterarProposta(p, nova);
-        
-        JOptionPane.showMessageDialog(null, "Proposta alterada com sucesso!!");
+        try {
+            Proposta nova = new Proposta();
+            ClienteController cc = new ClienteController();
+            VeiculoController vc = new VeiculoController();
+            
+            nova.setCliente(cc.getCliente(txtCPF.getText()));
+            nova.setVeiculo(vc.getVeiculo(txtModelo.getText()));
+            nova.setData(txtData.getText());
+            nova.setValor(Double.parseDouble(txtValor.getText()));
+            
+            propostaController.alterarProposta(nova);
+            
+            JOptionPane.showMessageDialog(null, "Proposta alterada com sucesso!!");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelaConsultaProposta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnAlterarActionPerformed
 

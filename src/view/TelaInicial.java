@@ -5,7 +5,11 @@
  */
 package view;
 
+import controller.ClienteController;
+import controller.PropostaController;
 import controller.VeiculoController;
+import javax.swing.JOptionPane;
+import model.Conexao;
 /**
  *
  * @author mario
@@ -34,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuEditar = new javax.swing.JMenu();
         menuVeiculo = new javax.swing.JMenu();
         itemMenuVeiculoCadastrar = new javax.swing.JMenuItem();
@@ -55,6 +60,15 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         menuArquivo.setText("Arquivo");
+
+        jMenuItem1.setText("Criar DB");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(jMenuItem1);
+
         jMenuBar1.add(menuArquivo);
 
         menuEditar.setText("Editar");
@@ -203,6 +217,22 @@ public class TelaInicial extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_itemMenuVeiculoListarActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //DB
+        Conexao.criarBanco();
+        
+        //Veiculo
+        new VeiculoController().jsonToDB();
+        
+        //Cliente
+        new ClienteController().jsonToDB();
+       
+        //Proposta
+        new PropostaController().jsonToDB();
+        
+        JOptionPane.showMessageDialog(rootPane, "Banco criado com sucesso!!");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,6 +279,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemMenuVeiculoListar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCliente;
     private javax.swing.JMenu menuEditar;

@@ -32,7 +32,6 @@ public class VeiculoDAO {
                 + "cor = '" + v.getCor()+ "',"
                 + "transmissao = '" + v.getTransmissao()+ "',"
                 + "motor = '" + v.getMotor()+ "',"
-                + "placa = '" + v.getPlaca()+ "',"
                 + "renavam = '" + v.getRenavam()+ "',"
                 + "chassi = '" + v.getChassi()+ "',"
                 + "valorCompra = '" + v.getValorCompra()+ "',"
@@ -51,7 +50,8 @@ public class VeiculoDAO {
                 + "luzDiurna = " + v.isLuzDiurna()+ ","
                 + "comandoVolante = " + v.isComandoVolante()+ ","
                 + "airBag = " + v.isAirBag()+ ","
-                + "nomeImagem = '" + v.getNomeImagem()+ "'";
+                + "nomeImagem = '" + v.getNomeImagem()+ "' "
+                + "WHERE placa = '" + v.getPlaca()+ "'";
                 
         if(stmt.executeUpdate(sql) > 0)
             System.out.println("Veiculo alterado com sucesso");
@@ -104,6 +104,14 @@ public class VeiculoDAO {
         return rsToVeiculo(rs);
     }
     
+    public Veiculo buscarVeiculoPlaca (String placa) throws ClassNotFoundException, SQLException{
+        stmt = Conexao.getStmt();
+        
+        rs = stmt.executeQuery("SELECT * FROM veiculo WHERE placa = '" + placa + "'");
+        
+        return rsToVeiculo(rs);
+    }
+    
     public ArrayList<Veiculo> listarTodosVeiculos() throws ClassNotFoundException, SQLException{
         stmt = Conexao.getStmt();
         rs = stmt.executeQuery("SELECT * FROM veiculo");
@@ -144,9 +152,11 @@ public class VeiculoDAO {
     
     //Conversoes
     private Veiculo rsToVeiculo (ResultSet rs) throws SQLException{
-        Veiculo v = new Veiculo();
+        Veiculo v = null;
         
         if(rs.next()){
+            v = new Veiculo();
+            
             v.setMarca(rs.getString("marca"));
             v.setModelo(rs.getString("modelo"));
             v.setAno(rs.getInt("ano"));
@@ -179,8 +189,9 @@ public class VeiculoDAO {
     }
     private ArrayList<Veiculo> rsToVeiculoArray(ResultSet rs) throws SQLException{
         ArrayList<Veiculo> veiculos = new ArrayList<>();
-        Veiculo v = new Veiculo();
+        
         while(rs.next()){
+            Veiculo v = new Veiculo();
             v.setMarca(rs.getString("marca"));
             v.setModelo(rs.getString("modelo"));
             v.setAno(rs.getInt("ano"));

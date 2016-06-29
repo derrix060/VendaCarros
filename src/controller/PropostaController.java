@@ -10,121 +10,53 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Proposta;
+import model.PropostaDAO;
 
 /**
  *
  * @author mario
  */
 public class PropostaController {
-    private final JavaToJson javaJson = new JavaToJson();
-    private final JsonToJava jsonJava = new JsonToJava();
-    private ArrayList<Proposta> listaPropostas = new ArrayList<>();
-    
-    //Constructor
-    public PropostaController() {
-        //pega a lista atualizada
-            this.listaPropostas = jsonJava.getPropostas();
-    }
+    private final PropostaDAO pDAO = new PropostaDAO();
     
     
-    public void adicionarProposta(Proposta p){
-        listaPropostas.add(p);
-        salvarLista();
-    }
-    
-    public void alterarProposta(Proposta antiga, Proposta nova){
-        int index = -1;
-        for (int i=0;i<listaPropostas.size();i++){
-            if(listaPropostas.get(i).getClinte().getCpf().equals(antiga.getClinte().getCpf()) && listaPropostas.get(i).getveiculo().getModelo().equals(antiga.getveiculo().getModelo())) {
-                index = i;
+    public void jsonToDB(){
+        ArrayList<Proposta> listaPropostas = new JsonToJava().getPropostas();
+        PropostaDAO pDAO = new PropostaDAO();
+        for(int i=0; i<listaPropostas.size(); i++){
+            try {
+                pDAO.inserirNovaProposta(listaPropostas.get(i));
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(PropostaController.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("Erro na proposta!!");
             }
         }
-        
-        if(index != -1){
-            listaPropostas.remove(index);
-            listaPropostas.add(nova);
-        }else{
-            System.err.println("Não foi possível achar a Proposta!");
-            return;
-        }
-        
-        salvarLista();
     }
     
-    public void alterarStatus(Proposta p){
-        Proposta temp = getProposta(p.getClinte().getCpf(), p.getveiculo().getModelo()).get(0);
-        
-        VeiculoController vc = new VeiculoController();
-        
-        try {
-            vc.alterarDisponibilidade(temp.getveiculo(), temp.isRealizada());
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(PropostaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        temp.setRealizada(!temp.isRealizada());
-        
-        salvarLista();
-        
+    public void adicionarProposta(Proposta p) throws ClassNotFoundException, SQLException{
+        pDAO.inserirNovaProposta(p);
     }
     
-    public void salvarLista(){
-        javaJson.salvarPropostas(listaPropostas);
+    public ArrayList<Proposta> getProposta() throws SQLException, ClassNotFoundException{
+        return pDAO.listarTodasPropostas();
+    }
+    public ArrayList<Proposta> getProposta(String cpf, String modelo) throws SQLException, ClassNotFoundException{
+        return pDAO.filtrarProposta(cpf, modelo);
     }
     
-    public ArrayList<Proposta> getProposta(String s){
-        ArrayList<Proposta> retorno = new ArrayList<>();
-        
-        if (CPF.isValidCPF(s)){
-            //consulta por cpf
-            for(int i = 0; i<listaPropostas.size();i++){
-                if(listaPropostas.get(i).getClinte().getCpf().equals(s)){
-                    retorno.add(listaPropostas.get(i));
-                }
-            }
-        }else{
-            //consulta por modelo
-            for(int i = 0; i<listaPropostas.size();i++){
-                if(listaPropostas.get(i).getveiculo().getModelo().equals(s)){
-                    retorno.add(listaPropostas.get(i));
-                }
-            }
-        }
-        
-        return retorno;
+    public ArrayList<Proposta> getPropostaCPF(String cpf) throws ClassNotFoundException, SQLException{
+        return pDAO.filtrarPropostaCPF(cpf);
     }
     
-    public ArrayList<Proposta> getProposta(){
-        return listaPropostas;
+    public ArrayList<Proposta> getPropostaModelo(String modelo) throws ClassNotFoundException, SQLException{
+        return pDAO.filtrarPropostaModelo(modelo);
     }
-    
-    public ArrayList<Proposta> getProposta(String cpf, String modelo){
-        ArrayList<Proposta> retorno = new ArrayList<>();
-        for(int i = 0; i<listaPropostas.size();i++){
-            if(listaPropostas.get(i).getveiculo().getModelo().equals(modelo) && listaPropostas.get(i).getClinte().getCpf().equals(cpf)){
-                retorno.add(listaPropostas.get(i));
-            }
-        }
-        
-        return retorno;
+
+    public void alterarStatus(Proposta p) throws ClassNotFoundException, SQLException {
+        pDAO.alterarProposta(p);
     }
-    
-    public ArrayList<Proposta> getProposta(Double valor, boolean minimo){
-        ArrayList<Proposta> retorno = new ArrayList<>();
-        
-        for(int i = 0; i<listaPropostas.size();i++){
-            if(minimo){
-                if(listaPropostas.get(i).getveiculo().getValorCompra() >= valor){
-                    retorno.add(listaPropostas.get(i));
-                }
-            }else{
-                if(listaPropostas.get(i).getveiculo().getValorCompra() <= valor){
-                    retorno.add(listaPropostas.get(i));
-                }
-            }
-        }
-        
-        return retorno;
+    public void alterarProposta(Proposta p) throws ClassNotFoundException, SQLException {
+        pDAO.alterarProposta(p);
     }
     
     public boolean isValido(String modelo, String cpf){
@@ -133,7 +65,4 @@ public class PropostaController {
         
         return (v && c);
     }
-    
-    
-    
 }

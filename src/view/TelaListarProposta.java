@@ -5,7 +5,10 @@
  */
 package view;
 import controller.PropostaController;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Proposta;
@@ -167,23 +170,28 @@ public class TelaListarProposta extends javax.swing.JFrame {
             limparTabela();
         
         //Renova
-            this.propostaController = new PropostaController();
+            propostaController = new PropostaController();
             
-        
-        if (!cpf.equals("") && !modelo.equals("")){
-            propostas = propostaController.getProposta(cpf, modelo);
-        }else if(!cpf.equals("")){
-            propostas = propostaController.getProposta(cpf);
-        }else if(!modelo.equals("")){
-            System.out.println("Passei aqui");
-            propostas = propostaController.getProposta(modelo);
-        }else{
-            propostas = propostaController.getProposta();
-        }
-        
-        for (int i=0; i<propostas.size();i++){
-            //{"CPF","Modelo","Data","Valor"}
-            dtm.addRow(new Object[]{propostas.get(i).getClinte().getCpf(), propostas.get(i).getveiculo().getModelo(), propostas.get(i).getData(), propostas.get(i).getValor(), propostas.get(i).isRealizada()});
+        try {
+            if (!cpf.equals("") && !modelo.equals("")){
+                propostas = propostaController.getProposta(cpf, modelo);
+            }else if(!cpf.equals("")){
+                propostas = propostaController.getPropostaCPF(cpf);
+            }else if(!modelo.equals("")){
+                System.out.println("Passei aqui");
+                propostas = propostaController.getPropostaModelo(modelo);
+            }else{
+                propostas = propostaController.getProposta();
+            }
+            
+            for (int i=0; i<propostas.size();i++){
+                //System.out.println("Modelo: " + propostas.get(i).getVeiculo().getModelo());
+                //{"CPF","Modelo","Data","Valor"}
+                dtm.addRow(new Object[]{propostas.get(i).getClinte().getCpf(), propostas.get(i).getVeiculo().getModelo(), propostas.get(i).getData(), propostas.get(i).getValor(), propostas.get(i).isRealizada()});
+            }
+        } 
+        catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaListarProposta.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -199,33 +207,42 @@ public class TelaListarProposta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAlterarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarStatusActionPerformed
-        int row = tblProposta.getSelectedRow();
-        String cpf = tblProposta.getValueAt(row, 0).toString();
-        String modelo = tblProposta.getValueAt(row, 1).toString();
-        
-        Boolean valido = Boolean.getBoolean(tblProposta.getValueAt(row, 4).toString());
-        
-        Proposta p = propostaController.getProposta(cpf, modelo).get(0);
-        propostaController.alterarStatus(p);
-        
-        btnConsultarActionPerformed(evt);
+        try {
+            int row = tblProposta.getSelectedRow();
+            String cpf = tblProposta.getValueAt(row, 0).toString();
+            String modelo = tblProposta.getValueAt(row, 1).toString();
+            
+            Boolean valido = Boolean.getBoolean(tblProposta.getValueAt(row, 4).toString());
+            
+            Proposta p = propostaController.getProposta(cpf, modelo).get(0);
+            propostaController.alterarStatus(p);
+            
+            btnConsultarActionPerformed(evt);
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaListarProposta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAlterarStatusActionPerformed
 
     private void btnDetalharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalharActionPerformed
-        int row = tblProposta.getSelectedRow();
-        
-        if(row == -1){
-            return;
-        }
+        try {
+            int row = tblProposta.getSelectedRow();
             
-        String cpf = tblProposta.getValueAt(row, 0).toString();
-        String modelo = tblProposta.getValueAt(row, 1).toString();
-        
-        Proposta p = propostaController.getProposta(cpf, modelo).get(0);
-        
-        TelaConsultaProposta tela = new TelaConsultaProposta(p);
-        
-        tela.setVisible(true);        
+            if(row == -1){
+                return;
+            }
+            
+            String cpf = tblProposta.getValueAt(row, 0).toString();
+            String modelo = tblProposta.getValueAt(row, 1).toString();
+            
+            Proposta p = propostaController.getProposta(cpf, modelo).get(0);        
+            
+            TelaConsultaProposta tela = new TelaConsultaProposta(p);
+            
+            tela.setVisible(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaListarProposta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDetalharActionPerformed
 
     

@@ -14,6 +14,21 @@ import model.ClienteDAO;
 public class ClienteController {
     private final ClienteDAO cliDAO = new ClienteDAO();
     
+    public void jsonToDB(){
+        ArrayList<Cliente> listaCliente = new JsonToJava().getClientes();
+        
+            ClienteDAO cDAO = new ClienteDAO();
+        for(int i=0;i<listaCliente.size();i++){
+            try {
+                cDAO.inserirNovoCliente(listaCliente.get(i));
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("Erro no cliente: " + listaCliente.get(i).getNomeCompleto());
+            }
+            
+        }
+    }
+    
     public ArrayList<Cliente> listarClientes(){
         try {
             return cliDAO.listarTodosClientes();

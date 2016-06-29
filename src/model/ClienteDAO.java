@@ -80,9 +80,11 @@ public class ClienteDAO {
     
     //Conversoes
     private Cliente rsToCliente (ResultSet rs) throws SQLException{
-        Cliente cliente = new Cliente();
+        Cliente cliente = null;
         
         if (rs.next()){
+            cliente = new Cliente();
+            
             cliente.setCpf(rs.getString("cpf"));
             cliente.setNomeCompleto(rs.getString("nomeCompleto"));
             cliente.setIdade(rs.getInt("idade"));
@@ -95,8 +97,9 @@ public class ClienteDAO {
     }
     private ArrayList<Cliente> rsToClienteArray(ResultSet rs) throws SQLException{
         ArrayList<Cliente> clientes = new ArrayList<>();
-        Cliente cliente = new Cliente();
+        
         while (rs.next()){
+            Cliente cliente = new Cliente();
             cliente.setCpf(rs.getString("cpf"));
             cliente.setNomeCompleto(rs.getString("nomeCompleto"));
             cliente.setIdade(rs.getInt("idade"));

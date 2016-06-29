@@ -7,8 +7,11 @@ package view;
 import controller.ClienteController;
 import controller.PropostaController;
 import controller.VeiculoController;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Proposta;
@@ -109,18 +112,22 @@ public class TelaCadastroProposta extends javax.swing.JFrame {
         if (!propostaController.isValido(txtModelo.getText(), txtCPF.getText())){
             JOptionPane.showMessageDialog(null, "Proposta inválida!! Verifique o Cliente e o Veículo!!", "Warning",JOptionPane.WARNING_MESSAGE);
         }else{
-            Cliente c = new ClienteController().getCliente(txtCPF.getText());
-            Veiculo v = new VeiculoController().getVeiculo(txtModelo.getText());
-            
-            p.setCliente(c);
-            p.setVeiculo(v);
-            p.setData(txtData.getText());
-            p.setValor(Double.parseDouble(txtValor.getText()));
-            
-            propostaController.adicionarProposta(p);
-            
-            FrameProposta.limparCampos();
-            JOptionPane.showMessageDialog(null, "Proposta cadastrada com sucesso!");
+            try {
+                Cliente c = new ClienteController().getCliente(txtCPF.getText());
+                Veiculo v = new VeiculoController().getVeiculo(txtModelo.getText());
+                
+                p.setCliente(c);
+                p.setVeiculo(v);
+                p.setData(txtData.getText());
+                p.setValor(Double.parseDouble(txtValor.getText()));
+                
+                propostaController.adicionarProposta(p);
+                
+                FrameProposta.limparCampos();
+                JOptionPane.showMessageDialog(null, "Proposta cadastrada com sucesso!");
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TelaCadastroProposta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

@@ -72,6 +72,7 @@ public class VeiculoController {
             resposta = veiculoDAO.listarTodosVeiculos();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(VeiculoController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         return resposta;
     }
@@ -84,6 +85,7 @@ public class VeiculoController {
             resposta = veiculoDAO.filtrarVeiculo(marca);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(VeiculoController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return resposta;
@@ -95,6 +97,7 @@ public class VeiculoController {
             resposta = veiculoDAO.filtrarVeiculo(anoMinimo);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(VeiculoController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return resposta;
@@ -106,6 +109,7 @@ public class VeiculoController {
             resposta = veiculoDAO.filtrarVeiculo(valorMaximo);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(VeiculoController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return resposta;
@@ -117,6 +121,7 @@ public class VeiculoController {
             resposta = veiculoDAO.filtrarVeiculo(marca, anoMinimo, valorMaximo);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(VeiculoController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return resposta;

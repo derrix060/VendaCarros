@@ -179,45 +179,39 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     }
     
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (veiculoController.isValido(FrameVeiculo.txtModelo.getText())){
-            JOptionPane.showMessageDialog(null, "Veículo não localizado!!", "Warning",JOptionPane.WARNING_MESSAGE);
-        }
-        else{
+        Veiculo veiculo = new Veiculo();
             
-            Veiculo veiculo = new Veiculo();
-            
-            veiculo.setMarca(cmbMarca.getSelectedItem().toString());
-            veiculo.setModelo(txtModelo.getText());
-            veiculo.setAno(Integer.parseInt(txtAno.getText()));
-            veiculo.setCor(cmbCor.getSelectedItem().toString());
-            veiculo.setTransmissao(cmbTransmissao.getSelectedItem().toString());
-            veiculo.setMotor(txtMotor.getText());
-            veiculo.setPlaca(txtPlaca.getText());
-            veiculo.setRenavam(Long.parseLong(txtRenavam.getText()));
-            veiculo.setChassi(txtChassi.getText());
-            veiculo.setValorCompra(Double.parseDouble(txtValorCompra.getText()));
-            veiculo.setOdometro(Integer.parseInt(txtOdometro.getText()));
-            veiculo.setDisponivel(chkDirecaoHidraulica.isSelected());
-            veiculo.setCategoria(cmbCategoria.getSelectedItem().toString());
-            veiculo.setArCondicionado(chkArCondicionado.isSelected());
-            veiculo.setAbs(chkABS.isSelected());
-            veiculo.setTetoSolar(chkTetoSolar.isSelected());
-            veiculo.setKitEletrico(chkKitEletrico.isSelected());
-            veiculo.setBancoCouro(chkBancoCouro.isSelected());
-            veiculo.setDirecaoHidraulica(chkDirecaoHidraulica.isSelected());
-            veiculo.setFarolMilha(chkFarolMilha.isSelected());
-            veiculo.setCentralMultimidia(chkCentralMultimidia.isSelected());
-            veiculo.setPilotoAutomatico(chkPilotoAutomatico.isSelected());
-            veiculo.setLuzDiurna(chkLuzDiurna.isSelected());
-            veiculo.setComandoVolante(chkComandoVolante.isSelected());
-            veiculo.setAirBag(chkAirBag.isSelected());
-            
-            
-            veiculoController.alterarVeiculo(veiculo);
-            
-            JOptionPane.showMessageDialog(null, "Veículo alterado com sucesso!");
-            
-        }
+        veiculo.setMarca(cmbMarca.getSelectedItem().toString());
+        veiculo.setModelo(txtModelo.getText());
+        veiculo.setAno(Integer.parseInt(txtAno.getText()));
+        veiculo.setCor(cmbCor.getSelectedItem().toString());
+        veiculo.setTransmissao(cmbTransmissao.getSelectedItem().toString());
+        veiculo.setMotor(txtMotor.getText());
+        veiculo.setPlaca(txtPlaca.getText());
+        veiculo.setRenavam(Long.parseLong(txtRenavam.getText()));
+        veiculo.setChassi(txtChassi.getText());
+        veiculo.setValorCompra(Double.parseDouble(txtValorCompra.getText()));
+        veiculo.setOdometro(Integer.parseInt(txtOdometro.getText()));
+        veiculo.setDisponivel(chkDirecaoHidraulica.isSelected());
+        veiculo.setCategoria(cmbCategoria.getSelectedItem().toString());
+        veiculo.setArCondicionado(chkArCondicionado.isSelected());
+        veiculo.setAbs(chkABS.isSelected());
+        veiculo.setTetoSolar(chkTetoSolar.isSelected());
+        veiculo.setKitEletrico(chkKitEletrico.isSelected());
+        veiculo.setBancoCouro(chkBancoCouro.isSelected());
+        veiculo.setDirecaoHidraulica(chkDirecaoHidraulica.isSelected());
+        veiculo.setFarolMilha(chkFarolMilha.isSelected());
+        veiculo.setCentralMultimidia(chkCentralMultimidia.isSelected());
+        veiculo.setPilotoAutomatico(chkPilotoAutomatico.isSelected());
+        veiculo.setLuzDiurna(chkLuzDiurna.isSelected());
+        veiculo.setComandoVolante(chkComandoVolante.isSelected());
+        veiculo.setAirBag(chkAirBag.isSelected());
+        veiculo.setNomeImagem(txtLocalFoto.getText());
+
+
+        veiculoController.alterarVeiculo(veiculo);
+
+        JOptionPane.showMessageDialog(null, "Veículo alterado com sucesso!");
         
     }//GEN-LAST:event_btnAlterarActionPerformed
 
